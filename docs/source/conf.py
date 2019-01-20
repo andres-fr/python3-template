@@ -1,14 +1,4 @@
 # -*- coding: utf-8 -*-
-
-from os.path import abspath, dirname
-import sys
-
-MODULE_ROOT_DIR = dirname(dirname(dirname(abspath(__file__))))
-# append module root directory to sys.path
-if MODULE_ROOT_DIR not in sys.path:
-    sys.path.append(MODULE_ROOT_DIR)
-#
-html_theme = "sphinx_rtd_theme"
 #
 # Configuration file for the Sphinx documentation builder.
 #
@@ -26,7 +16,16 @@ html_theme = "sphinx_rtd_theme"
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+from os.path import abspath, dirname
+import sys
 
+MODULE_ROOT_DIR = dirname(dirname(dirname(abspath(__file__))))
+# append module root directory to sys.path
+if MODULE_ROOT_DIR not in sys.path:
+    sys.path.append(MODULE_ROOT_DIR)
+#
+html_theme = "sphinx_rtd_theme"
+pdf_break_level = 0
 # -- Project information -----------------------------------------------------
 
 project = 'dummypackage'

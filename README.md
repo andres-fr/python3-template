@@ -364,6 +364,8 @@ if MODULE_ROOT_DIR not in sys.path:
     sys.path.append(MODULE_ROOT_DIR)
 #
 html_theme = "sphinx_rtd_theme"
+
+# check with flake8!
 ```
 
 ### Generate
@@ -442,6 +444,8 @@ By default, Travis starts a new virtual machine **from scratch for every single 
 
 
 # TODO:
+
+* sphinx autodoc pdf is empty
 
 * reformat all docstrings to the autodoc format
 
