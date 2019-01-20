@@ -1,5 +1,6 @@
-# python3-template  [![Build Status](https://travis-ci.org/andres-fr/python3-template.svg?branch=master)](https://travis-ci.org/andres-fr/python3-template)    [![Documentation Status](https://readthedocs.org/projects/python3-template/badge/?version=latest)](https://python3-template.readthedocs.io/en/latest/?badge=latest)
-         
+# python3-template   [![Build Status](https://travis-ci.org/andres-fr/python3-template.svg?branch=master)](https://travis-ci.org/andres-fr/python3-template) [![Documentation Status](https://readthedocs.org/projects/python3-template/badge/?version=latest)](https://python3-template.readthedocs.io/en/latest/?badge=latest)
+
+
 Dummy Python3 project providing structure for development, unit testing, runtime/memory benchmarking, PEP8 check, [autodocumentation](https://python3-template.readthedocs.io), deployment and CI via Travis.
 
 
