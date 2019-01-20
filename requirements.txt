@@ -1,0 +1,6 @@
+flake8
+coverage
+snakeviz
+memory_profiler
+sphinx
+sphinx_rtd_theme

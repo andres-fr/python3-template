@@ -1,0 +1,462 @@
+# python3-template  [![Build Status](https://travis-ci.org/andres-fr/python3-template.svg?branch=master)](https://travis-ci.org/andres-fr/python3-template)    [![Documentation Status](https://readthedocs.org/projects/python3-template/badge/?version=latest)](https://python3-template.readthedocs.io/en/latest/?badge=latest)
+         
+Dummy Python3 project providing structure for development, unit testing, runtime/memory benchmarking, PEP8 check, [autodocumentation](https://python3-template.readthedocs.io), deployment and CI via Travis.
+
+
+* The actual code is to be developed in the `dummypackage` library, and used in an application like `dummyapp.py`, which can be run with `python dummyapp.py`. **To ensure proper function of the tools, all subdirectories must include an `__init.py__` file**.
+
+* The unit tests are developed in the `utest` directory. They can also be arbitrarily nested, but also **must include an `__init.py__` file in each test directory**.
+
+* Reports for runtime and memory benchmarks can be generated into `timebenchmark` and `memorybenchmark` respectively.
+
+* Autodocs are also generated into `docs` in PDF as well as HTML (which can be deployed [online](https://python3-template.readthedocs.io)).
+
+* All these tasks can be performed manually as explained later on, and also are automated via Travis CI as it can be seen in the `.travis.yml` file, and the `ci_scripts` directory.
+
+
+This readme has been developed for Ubuntu-like systems, but the Python examples should transfer well to other systems. Also note that this has been tested for Python 3 only, make sure that your `python` command invokes a Python 3 binary (or that you adapt the exmples presented here).
+
+
+# Dependencies:
+
+See `requirements.txt`. Also, if not using `conda`, add this line to your .bashrc to allow executing binaries installed with `pip --user`:
+
+```bash
+export PATH=${PATH}:$HOME/.local/bin
+```
+
+# Unit Testing:
+
+All unit test files must fulfill the following requirements (see the examples for more details):
+
+* They have to be in the `utest` directory
+* Their name has to end in `_test.py` (although this is customizable)
+* They import functionality from the package like this: `from dummypackage.foo_module import Foo`
+* They import functionality from each other like this: `from .foo_test import FooTestCaseCpu`
+* They import `unittest` and extend `unittest.TestCase` classes
+* All test method names from the extended unittest classes begin with `test` (also customizable)
+* Nested directories are allowed. However, **each test directory has to contain an empty `__init__.py` file**
+
+If these conditions are met, all the tests can be run from the CLI or within Python.
+
+**Note**: the `utest` directory includes a special test case, `tautology.py` which should always pass and can be used to ensure that the testing facilities work correctly. Its name doesn't end in `_test.py`, so it doesn't get included in the ordinary tests and has to be called explicitly.
+
+### Run from CLI:
+
+```bash
+# run all existing tests
+python -m unittest discover -s utest -t . -p "*_test.py" -v
+# Run individual test modules (from the repo root dir)
+python -m unittest utest/foo_test.py -v
+python -m unittest utest/bar_test.py -v
+python -m unittest utest/nestedtests/nested_test.py -v
+# Run individual classes
+python -m unittest utest.foo_test.FooTestCaseCpu -v
+python -m unittest utest.nestedtests.nested_test.QuackTestCaseCpu -v
+# Run individual methods
+python -m unittest utest.bar_test.BarTestCaseCpu.test_inheritance -v
+```
+
+### Run within Python:
+
+```python
+
+# run all existing tests and collect results
+import utest
+results = utest.run_all_tests()
+print(results)
+
+# run all tests for a given module and collect results
+import utest.foo_test
+results = utest.run_module(utest.foo_test);
+print(results)
+
+# run for several modules:
+import utest
+import utest.foo_test as f
+import utest.nestedtests.nested_test as n
+results = utest.run_modules([f, n]);
+print(results)
+
+# run for a single testcase
+import utest
+from utest.foo_test import FooTestCaseCpu
+results = utest.run_testcase(FooTestCaseCpu);
+print(results)
+
+# run for several testcases
+import utest
+from utest.foo_test import FooTestCaseCpu
+from utest.bar_test import BarTestCaseCpu
+results = utest.run_testcases([FooTestCaseCpu, BarTestCaseCpu]);
+print(results)
+
+# run for a single method
+import utest
+results = utest.run_testmethod("utest.foo_test.FooTestCaseCpu.test_loop");
+print(results)
+
+# run for several methods
+import utest
+results = utest.run_testmethods(["utest.foo_test.FooTestCaseCpu.test_loop",
+                                "utest.bar_test.BarTestCaseCpu.test_loop"]);
+print(results)
+```
+
+
+# Code Coverage:
+
+Code coverage determines how much of the implemented code do the unit tests go through. Although not particularly sound, it can be used as a way to check that the unit testing relates closely to the developed code. Plus, it is easy to automate.
+
+### From CLI:
+
+The usage is very similar to running with `python`, but prepending `coverage run` instead, and adding a `--source` directory, which contains the actual code pool being inspected:
+
+```
+# define the location for the coverage file:
+export COVERAGE_FILE=codecoverage/coverage`date "+%Y%m%d_%H%M%S"`
+
+# Run whatever you want to run but prepending 'coverage run'
+# the --branch flag activates branch coverage (as opposed to statement coverage)
+# the -a flag will accumulate the reports
+coverage run --source dummypackage --branch -m unittest discover -s utest -t . -p "*_test.py" -v
+
+# Print report on terminal
+coverage report -m
+
+# more elaborated XML report:
+coverage xml -o $COVERAGE_FILE.xml
+
+# interactive HTML report
+coverage html -d $COVERAGE_FILE\_html
+firefox $COVERAGE_FILE\_html/index.html
+```
+
+### Within Python:
+
+This sample script performs unit testing AND test coverage wthout creating any files (see the script `ci_scripts/utest_with_coverage.py`):
+
+```python
+
+import coverage
+import utest
+
+# same as with the CLI. A suffix will be automatically added
+COVERAGE_FILE = "codecoverage/coverage"
+
+# wrap the testing with the coverage analyzer:
+c = coverage.Coverage(data_file=COVERAGE_FILE, data_suffix=True, branch=True,
+                      source=["dummypackage"])
+c.start()
+test_results = utest.run_all_tests()
+c.stop()
+
+# at this point c.save() and c.html_report(outfile=etc) would generate files.
+# This instead handles the data within Python, as coverage.CoverageData
+percentage = c.report()
+
+print("This script did", test_results.testsRun, "tests in total.")
+print("No. of test errors:", len(test_results.errors))
+print("No. of test failures:", len(test_results.failures))
+print("Code coverage of tests (percentage):", percentage)
+```
+
+
+
+
+
+# CPU Runtime Benchmarking:
+
+
+### Run and print on terminal, sorted by total time:
+
+```bash
+python -m cProfile -s tottime dummyapp.py
+```
+
+It can be sorted by any of these:
+```
+calls (call count)
+cumulative (cumulative time)
+cumtime (cumulative time)
+file (file name)
+filename (file name)
+module (file name)
+ncalls (call count)
+pcalls (primitive call count)
+line (line number)
+name (function name)
+nfl (name/file/line)
+stdname (standard name)
+time (internal time)
+tottime (internal time)
+```
+
+Sample output:
+
+```
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+      100    1.496    0.015    1.496    0.015 {method 'index' of 'list' objects}
+        1    0.023    0.023    0.023    0.023 bar_module.py:15(__init__)
+     93/1    0.016    0.000    1.590    1.590 {built-in method builtins.exec}
+        1    0.010    0.010    1.590    1.590 dummyapp.py:6(<module>)
+       47    0.005    0.000    0.005    0.000 {built-in method marshal.loads}
+  229/227    0.004    0.000    0.011    0.000 {built-in method builtins.__build_class__}
+```
+
+
+### Save to file and explore interactively with web browser using `snakeviz`:
+
+```bash
+python -m cProfile -o timebenchmark/dummyapp.`date "+%Y%m%d_%H%M%S"` dummyapp.py
+# open results in browser using the snakeviz server
+snakeviz timebenchmark/dummyapp.20190112_195256
+```
+
+### Within Python:
+
+This small snippet prints the results to the terminal and returns some relevant figures (see the script `ci_scripts/runtime_benchmark.py`):
+
+```
+import cProfile
+import pstats
+from io import StringIO
+
+def get_total_time_and_calls(fn, sort_by="time"):
+    """
+    This function calls the given a parameterless functor while benchmarking
+    it via cProfile. A report is printed to the terminal and the tuple
+    (n_seconds, n_calls) is returned.
+    """
+    pr = cProfile.Profile()
+    pr.enable()
+    fn()
+    pr.disable()
+    #
+    s = StringIO()
+    ps = pstats.Stats(pr, stream=s)
+    ps.strip_dirs().sort_stats(sort_by)
+    ps.print_stats()
+    print(s.getvalue())
+    #
+    return ps.total_tt, ps.total_calls
+
+get_total_time_and_calls(lambda: 2+2)
+```
+
+
+# Memory Benchmarking:
+
+This package reports memory usage of the Python process, line-by-line or as a function of time. As with the runtime profiler, there are several ways to run this functionality.
+
+
+### Decorators:
+
+This way requires to import and use the `@profile` decorator in the desired `def` declarations of your Python files. Unlike the other methods, it has the drawback that it requires to alter or duplicate the source code. To perform the profiling, run the decorated files (see e.g. the `memorybenchmark` directory) with the python interpreter. Sample output:
+
+
+```
+Filename: memorybenchmark/loop_benchmark.py
+Line     Mem usage    Increment   Line Contents
+================================================
+    21     14.6 MiB     14.6 MiB   @profile  # decorator for (https://pypi.org/project/memory-profiler/)
+    22                             def do_loop(clss, memsize, loopsize):
+    23                                 """
+    24                                 Create a Foo instance and loop it.
+    25                                 """
+    26     14.6 MiB      0.0 MiB       x = clss(memsize)
+    27     14.6 MiB      0.0 MiB       x.loop(loopsize)
+
+    21     14.6 MiB     14.6 MiB   @profile  # decorator for (https://pypi.org/project/memory-profiler/)
+    22                             def do_loop(clss, memsize, loopsize):
+    23                                 """
+    24                                 Create a Foo instance and loop it.
+    25                                 """
+    26     53.3 MiB     38.7 MiB       x = clss(memsize)
+    27     53.3 MiB      0.0 MiB       x.loop(loopsize)
+```
+
+
+
+### Time-based memory usage:
+
+The module provides the `mprof` binary to perform time-based analysis. Calling `mprof run loop_benchmark.py` will generate a `mprofile_TIMESTAMP.dat` file, which can be visualized with `mprof plot`(if pylab/matplotlib is installed) and looks like this:
+
+```
+FUNC __main__.do_loop 14.4766 1547322141.5961 14.4766 1547322141.5963
+FUNC __main__.do_loop 14.4766 1547322141.5964 14.8281 1547322143.1454
+CMDLINE /usr/bin/python dummyapp.py
+MEM 1.511719 1547322141.5060
+MEM 31.281250 1547322141.6064
+MEM 53.195312 1547322141.7067
+MEM 53.195312 1547322141.8071
+MEM 53.195312 1547322141.9074
+MEM 53.195312 1547322142.0078
+MEM 53.195312 1547322142.1081
+MEM 53.195312 1547322142.2085
+```
+
+The available `mprof` commands are:
+```bash
+mprof run: running an executable, recording memory usage
+mprof plot: plotting one the recorded memory usage (by default, the last one)
+mprof list: listing all recorded memory usage files in a user-friendly way.
+mprof clean: removing all recorded memory usage files.
+mprof rm: removing specific recorded memory usage files
+```
+
+Further information can be found in the package homepage.
+
+### Within Python:
+
+
+This small snippet returns memory usage as a function of time (see the script `ci_scripts/runtime_benchmark.py`). Line-by-line analysis using the `LineProfiler` class doesn't seem to be supported by this method, see the first and second approaches for alternatives:
+
+```
+from memory_profiler import memory_usage
+
+def fn(times=1000, message="hello!"):
+    l = []
+    for i in range(times):
+        l.append(message)
+    for i in range(times**2):
+        l.append(message)
+
+usage = memory_usage((fn, (1000, "goodbye")), interval=0.05)
+print(usage)
+
+```
+
+
+# Codestyle Check:
+
+Using it is pretty straightforward: simply call `flake8` or `python -m flake8` in the repository root directory. If any errors are present, the command will print them and return with error status.
+
+Note that some "errors" are actually proper design decissions. These can be bypassed with the `noqa` directive, like this: `import environment  # noqa: F401`.
+
+
+
+
+
+
+# Autodoc:
+
+
+### Setup
+
+This has to be done once:
+
+```
+# create layout. Args help: sphinx-quickstart -h
+sphinx-quickstart -q --sep -p dummypackage -a "andres-fr" -v 3 -r 141592 --makefile --batchfile --ext-autodoc --ext-coverage --ext-mathjax --ext-viewcode --ext-githubpages docs/
+
+# populate contents with docstrings (error?):
+sphinx-apidoc -o docs/source dummypackage
+
+# add this to the beginning of  docs/source/conf.py
+from os.path import abspath, dirname
+import sys
+
+MODULE_ROOT_DIR = dirname(dirname(dirname(abspath(__file__))))
+# append module root directory to sys.path
+if MODULE_ROOT_DIR not in sys.path:
+    sys.path.append(MODULE_ROOT_DIR)
+#
+html_theme = "sphinx_rtd_theme"
+```
+
+### Generate
+
+This command will remove existing docs, and update them with the current repository state, generating them as PDF and HTML:
+
+```
+make -C docs clean && make -C docs latexpdf && make -C docs html
+```
+
+### Deploy
+
+Optionally, go to https://readthedocs.org/ and synchronize it with your github account. Importing the repository should be straightforward. The docs homepage of the project should provide a badge like the one at the top of this README and a link to the online docs. Note that the advertisment can be removed in the "Admin" tab.
+
+This repo's docs are being deployed to https://python3-template.readthedocs.io
+
+
+
+# Travis CI:
+
+
+### Intro:
+
+In the context of of CD/CI, a git repository (or any other similar object to automatize tasks on) is regarded as a **material**, with its specific set of **trigger actions** (e.g. commit or pull request in a git repo, or certain API requests in a custom REST system).
+
+For each of those actions, a **CD/CI pipeline** may be defined, which will be executed by the CD/CI system upon trigger by some event. Depending on the CI system, the pipelines allow some complexity like branching, but it is best practice to keep them as simple as possible.
+
+Although different materials have different sets of actions, the spirit is in general similar, in what is known as CI. [Quoting](https://github.com/mbonaci/mbo-storm/wiki/Integrate-Travis-CI-with-your-GitHub-repo):
+
+> "Continuous Integration is the umbrella for various techniques and practices that every self-respecting software project should employ:
+> 
+> * **Build automation** - every commit/push to an scm repo automatically triggers a new build (anything in the master branch is deployable)
+> * **Test automation** - tests are evaluated as integral part of the build process (that's old news, right?)
+> * **SCM integration** - primarily to facilitate build automation, but also to be able to report on issues, versions, milestones, ...
+> * **Project management integration** - Basecamp, Campfire, Acunote and other PM tools (people, tasks, schedules, ...)
+> * **Project Dashboard** - everything is out in the open (generally without any read access restrictions, making it available to all interested parties)
+
+
+
+### Travis and this repo:
+
+* https://docs.travis-ci.com
+* https://docs.travis-ci.com/user/languages/python/
+
+Travis is a CI/CD tool that can be easily linked to a GitHub account for free, and managed through a `travis.yaml` file present at the repo's root (More info: https://docs.travis-ci.com/user/languages/python/). The goal for this repository is to trigger Travis after each **commit** to master, to perform the following tasks:
+
+1. Run in parallel:
+   1. Check coding style with flake
+   2. Check that the tautology is true
+   3. Check that all unit tests are passing
+   4. Check that code coverage ratio is above a number
+   5. Check that running a given routine never surpasses a certain memory usage
+   6. Check that running a given routine never exceedes a certain duration
+
+2. If all checks success, build the docs and `dummypackage` into our desired architectures.
+
+3. Deploy package in a way that can be installed via `pip`+ repo link
+
+
+For that, Travis implements two basic concepts, **stages** and **jobs**: A stage is a group of jobs that are allowed to run in parallel. However, each one of the stages runs one after another, and will only proceed if all jobs in the previous stage have passed successfully. If one job fails in one stage, all other jobs on the same stage will still complete, but all jobs in subsequent stages will be canceled, and the build fails.
+
+Each job can be mapped to a "script", which is a call to a program. If the script returns a nonzero status, deployment is considered a failure, and the build will be marked as “errored”.
+
+By default, Travis starts a new virtual machine **from scratch for every single job**. All the required dependencies have to be installed prior to running the jobs. This can take a while, so it is helpful to design the CI pipeline in a way that minimizes overhead. Some of the dependencies can be shared across jobs using the `cache` keyword.
+
+
+### Steps:
+
+1. sync your GitHub account with Travis, and allow access etc to your repositories. Finally, "activate" the desired repo in Travis. You should see the typical `[build | failing]` badge. Click on it and copy the markdown link into the main `README` of the repo, as shown on the top of this file.
+
+2. In your GitHub `activated_repo->settings->webhooks`, select which events you want to notify to Travis. In our case we will activate **commits** and **pull requests**. Any time any of these happens, GitHub will send a request to Travis with all the infos involved.
+
+3. Now both sides know about each other, make sure you understand the `.travis.yml` file and customize it as desired.
+
+
+
+
+# TODO:
+
+* reformat all docstrings to the autodoc format
+
+* bug sphinx build: toc-tree file?? https://dont-be-afraid-to-commit.readthedocs.io/en/latest/documentation.html
+checking consistency... /home/a9fb1e/github-work/python3-template/docs/source/modules.rst: WARNING: document isn't included in any toctree
+
+* add all OS to travis file: for the moment not supported! https://github.com/travis-ci/travis-ci/issues/9744#issuecomment-419426053
+
+* automatic "version number" -> github releases
+
+* To deploy to PIP, you need to install the `travis` command line client (using `apt` in Ubuntu). TODO: https://docs.travis-ci.com/user/deployment/pypi/
+
+* nicer theme for docs not working?
+
+* update readme. include the fact that travis autodoc part is independent from the hosted part... or is it?
+
+* how put pdf and html docs in the repo visible (copy): allow travis to change commit.
+
+* add online codecov? https://codecov.io/

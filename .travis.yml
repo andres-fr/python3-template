@@ -1,0 +1,54 @@
+# this line routes the builds to Ubuntu 16.04
+dist: xenial
+
+# implicitly creates a venv for python in the VM (so pip syntax is "global")
+language: python
+python:
+  - 3.7
+
+# by default Travis starts every job from scratch. This speeds up things
+cache: pip
+
+# Perform pipeline only for events to master branch
+branches:
+  only:
+  - master
+
+#  https://docs.travis-ci.com/user/multi-os/
+os:
+  - linux
+  # - osx
+  #- windows
+
+install: pip install -r requirements.txt
+
+# here we define the stages. stage ordering will come later
+jobs:
+  include:
+    # Perform all needed tests to ensure repo quality. All scripts
+    # in a stage are done in parallel. Stages are done sequentially.
+    - stage: tests
+      name: "Check Code Style"
+      script: python -m flake8
+    - script: python -m unittest utest/tautology.py
+      name: "Tautological Test"
+    - script: python ci_scripts/utest_with_coverage.py -p 50.0 # -p is the codecov percent required to pass
+      name: "Unit Testing and Code Coverage"
+    - script: python ci_scripts/memory_benchmark.py -m 512.0 -i 0.05 # -p max 512MB allowed, measuring every 50ms
+      name: "Memory Benchmarking"
+    - script: python ci_scripts/runtime_benchmark.py -m 5.0 # -p max 5s per loop allowed (see script)
+      name: "Runtime Benchmarking"
+
+    # If all tests pass, go on to the next stage
+    - stage: docs
+      name: "Create Autodocs"
+      script: make -C docs html
+      before_script: make -C docs clean
+      after_script: make -C docs latexpdf
+
+# You can specify the order for stages in the section stages:
+stages:
+  #- test_preparation
+  - tests
+  - docs
+  #- deploy
