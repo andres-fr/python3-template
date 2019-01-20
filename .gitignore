@@ -64,9 +64,7 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/build/*
-!docs/build/html/
-!docs/build/latex/
+docs/build/doctrees
 docs/build/latex/*
 !docs/build/latex/dummypackage.pdf
 
