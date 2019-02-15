@@ -401,12 +401,16 @@ Once we reach a given milestone, we can package and deploy the code at its curre
 There are many different ways to accomplish that: the `git` CLI and `gitpython` package being two popular ones. Here we use the `bump2version` third-party library:
 
 ```
+# after finished making all changes and saving all files (to avoid 'Git working directory is not clean' error):
 git add .
 git commit -m "whatever"
 bump2version minor --message "test bump2version"
+git push
 ```
 
-
+```
+now did some change and commit again:
+```
 
 to the *Releases* tab, under the tag name and message. We want to customize this behaviour to also include the wheel and source distribution (see `https://developer.github.com/v3/repos/releases/#create-a-release` for details):
 
