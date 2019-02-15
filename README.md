@@ -12,6 +12,8 @@ Dummy Python3 project providing structure for development, unit testing, runtime
 
 * Autodocs are also generated into `docs` in PDF as well as HTML (which can be deployed [online](https://python3-template.readthedocs.io)).
 
+* A `setup.py` script to create an OS-agnostic package into `dist` is provided, as well as functionality to deploy it into git releases and PyPI.
+
 * All these tasks can be performed manually as explained later on, and also are automated via Travis CI as it can be seen in the `.travis.yml` file, and the `ci_scripts` directory.
 
 
@@ -338,8 +340,6 @@ Note that some "errors" are actually proper design decissions. These can be bypa
 
 
 
-
-
 # Autodoc:
 
 
@@ -376,11 +376,59 @@ This command will remove existing docs, and update them with the current reposit
 make -C docs clean && make -C docs latexpdf && make -C docs html
 ```
 
-### Deploy
+### Publish
 
 Optionally, go to https://readthedocs.org/ and synchronize it with your github account. Importing the repository should be straightforward. The docs homepage of the project should provide a badge like the one at the top of this README and a link to the online docs. Note that the advertisment can be removed in the "Admin" tab.
 
 This repo's docs are being deployed to https://python3-template.readthedocs.io
+
+
+
+
+
+
+
+
+
+
+# Deployment:
+
+
+### Tagging:
+
+Once we reach a given milestone, we can package and deploy the code at its current state. For that, you label that specific commit with a tag (see `https://git-scm.com/book/en/v2/Git-Basics-Tagging`). Apart from the possibilities that the `git` CLI offers, this repository contains a python script that allows to perform tag creation from terminal. Its contents also allow and ilustrate how to do it within Python:
+
+
+```
+python ci_scripts/git_tags.py -a 0 -b 0 -c 1 -m "alpha release of dummypackage"
+```
+
+### Packaging and Local Install:
+
+The `setup.py` script will automatically detect a tag pointing to the latest commit, and build the package in *source dist* (`sdist`) and *wheel* forms. The package will be in the `dist` directory, and some files will be generated into the `build` directory too. **Important**: remember to adapt the global variables in the script to your repo's needs.
+
+```
+python setup.py clean --all # optionally clean cache to prevent side effects
+python setup.py sdist bdist_wheel
+# now something like this will install the package locally:
+pip install dist/dummypackage_dummyname-0.0.1-py3-none-any.whl
+# this will update it
+pip install -U dist/dummypackage_dummyname-0.0.1-py3-none-any.whl
+# and this will remove it:
+pip uninstall dist/dummypackage_dummyname-0.0.1-py3-none-any.whl
+```
+
+### Publish
+
+TODO
+
+
+
+
+
+
+
+
 
 
 
@@ -454,9 +502,6 @@ checking consistency... /home/a9fb1e/github-work/python3-template/docs/source/mo
 
 * add all OS to travis file: for the moment not supported! https://github.com/travis-ci/travis-ci/issues/9744#issuecomment-419426053
 
-* automatic "version number" -> github releases
-
-* To deploy to PIP, you need to install the `travis` command line client (using `apt` in Ubuntu). TODO: https://docs.travis-ci.com/user/deployment/pypi/
 
 * nicer theme for docs not working?
 
@@ -465,3 +510,8 @@ checking consistency... /home/a9fb1e/github-work/python3-template/docs/source/mo
 * how put pdf and html docs in the repo visible (copy): allow travis to change commit.
 
 * add online codecov? https://codecov.io/
+
+
+* Finish deploy to PyPI part
+* Make tagged commits trigger travis build (and pypi deploy with pwd?)
+* add github releases automatically
