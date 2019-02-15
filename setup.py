@@ -20,7 +20,7 @@ def setup(): # (version_string):
     #
     setuptools.setup(
         name="dummypackage-dummyname",
-        version="0.1.0", # version_string,
+        version="0.2.0", # version_string,
         author="Dummy Name",
         author_email="dd@dummysolutions.com",
         description="A dummy package",
