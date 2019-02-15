@@ -441,7 +441,7 @@ We soo that tags get automatically tracked by GitHub. But for each release, we w
 1. Specify a changelog
 2. Pip-installable package in [wheel](https://pythonwheels.com/) format.
 
-This can be performed manually in the
+This can be performed manually via browser in the GitHub webpage. For the automated
 
 ```
 now did some change and commit again:
