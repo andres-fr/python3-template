@@ -398,10 +398,10 @@ This repo's docs are being deployed to https://python3-template.readthedocs.io
 
 Once we reach a given milestone, we can package and deploy the code at its current state. For that, you label that specific commit with a tag (see `https://git-scm.com/book/en/v2/Git-Basics-Tagging`). It is encouraged that tags follow semantic versioning (see `https://semver.org/`).
 
-There are many different ways to accomplish that: the `git` CLI and `gitpython` package being two popular ones. Here we use the `bumpversion` third-party library:
+There are many different ways to accomplish that: the `git` CLI and `gitpython` package being two popular ones. Here we use the `bump2version` third-party library:
 
 ```
-
+bump2version minor --message "test bump2version"
 ```
 
 
