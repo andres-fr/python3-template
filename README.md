@@ -401,6 +401,8 @@ Once we reach a given milestone, we can package and deploy the code at its curre
 There are many different ways to accomplish that: the `git` CLI and `gitpython` package being two popular ones. Here we use the `bump2version` third-party library:
 
 ```
+git add .
+git commit -m "whatever"
 bump2version minor --message "test bump2version"
 ```
 
