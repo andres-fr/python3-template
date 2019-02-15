@@ -13,7 +13,7 @@ import git
 THIS_REPO = git.Repo(search_parent_directories=True)
 
 
-def encode_repo_tagname(major_version, minor_version, bugfix):
+def encode_repo_tagname(major_version, minor_version, patch):
     """
     Expects three non-negative integers a,b,c like (0, 13,234) and returns a
     string in the form 'v0.13.234'
@@ -22,14 +22,14 @@ def encode_repo_tagname(major_version, minor_version, bugfix):
         "[add_tag]: inputs must be non-negative ints!"
     assert isinstance(minor_version, int),\
         "[add_tag]: inputs must be non-negative ints!"
-    assert isinstance(bugfix, int),\
+    assert isinstance(patch, int),\
         "[add_tag]: inputs must be non-negative ints!"
     #
     assert major_version >= 0, "[add_tag]: inputs must be non-negative ints!"
     assert minor_version >= 0, "[add_tag]: inputs must be non-negative ints!"
-    assert bugfix >= 0, "[add_tag]: inputs must be non-negative ints!"
+    assert patch >= 0, "[add_tag]: inputs must be non-negative ints!"
     #
-    tag_string = "v%d.%d.%d" % (major_version, minor_version, bugfix)
+    tag_string = "v%d.%d.%d" % (major_version, minor_version, patch)
     return tag_string
 
 
@@ -41,8 +41,8 @@ def decode_repo_tagname(tag_string):
     processed_tag = tag_string[1:].split(".")
     major_version = int(processed_tag[0])
     minor_version = int(processed_tag[1])
-    bugfix = int(processed_tag[2])
-    return (major_version, minor_version, bugfix)
+    patch = int(processed_tag[2])
+    return (major_version, minor_version, patch)
 
 
 def get_repo_tags(chronologically_sorted=False):
@@ -57,12 +57,12 @@ def get_repo_tags(chronologically_sorted=False):
         return t
 
 
-def create_repo_tag(major_version, minor_version, bugfix,
+def create_repo_tag(major_version, minor_version, patch,
                     message=None, ref="HEAD"):
     """
     This function prints current repo's tags and adds a new one to the
     commit signaled by 'ref', with the given message. The version and
-    bugfix numbers have to be non-negative integers (see encode_repo_tagname).
+    patch numbers have to be non-negative integers (see encode_repo_tagname).
     It returns a reference to the added tag object.
     """
     tags = get_repo_tags(True)
@@ -73,7 +73,7 @@ def create_repo_tag(major_version, minor_version, bugfix,
                   t.tag.message)
     else:
         print("This repo has no previous tags.")
-    new_tagname = encode_repo_tagname(major_version, minor_version, bugfix)
+    new_tagname = encode_repo_tagname(major_version, minor_version, patch)
     print("Adding new tag to", ref, "with name:", new_tagname, end="")
     if message is None:
         print()
@@ -93,9 +93,9 @@ if __name__ == "__main__":
     parser.add_argument("-b", "--minor_version", required=True,
                         type=int,
                         help="int>=0 representing the release's minor version")
-    parser.add_argument("-c", "--bugfix", required=True,
+    parser.add_argument("-c", "--patch", required=True,
                         type=int,
-                        help="int>=0 representing the release's bugfix number")
+                        help="int>=0 representing the release's patch number")
     parser.add_argument("-m", "--tag_message",
                         type=str, default=None,
                         help="Optional message for the git tag")
@@ -103,9 +103,9 @@ if __name__ == "__main__":
     #
     MAJOR_VERSION = args.major_version
     MINOR_VERSION = args.minor_version
-    BUGFIX = args.bugfix
+    PATCH = args.patch
     TAG_MESSAGE = args.tag_message
-    tag = create_repo_tag(MAJOR_VERSION, MINOR_VERSION, BUGFIX,
+    tag = create_repo_tag(MAJOR_VERSION, MINOR_VERSION, PATCH,
                           TAG_MESSAGE, "HEAD")
     #
     with open("README.md", "r") as f:
