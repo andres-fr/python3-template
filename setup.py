@@ -7,10 +7,10 @@ Make sure that the config entries are correct!
 """
 
 import setuptools
-from ci_scripts.git_tags import get_repo_tags
+# from ci_scripts.git_tags import get_repo_tags
 
 
-def setup(version_string):
+def setup(): # (version_string):
     """
     The proper setup function, adapted from the tutorial in
     https://packaging.python.org/tutorials/packaging-projects/
@@ -20,7 +20,7 @@ def setup(version_string):
     #
     setuptools.setup(
         name="dummypackage-dummyname",
-        version=version_string,
+        version="0.1.0", # version_string,
         author="Dummy Name",
         author_email="dd@dummysolutions.com",
         description="A dummy package",
@@ -41,5 +41,5 @@ def setup(version_string):
 
 
 if __name__ == "__main__":
-    last_tag = get_repo_tags(chronologically_sorted=True)[-1]
-    setup(last_tag.name)
+    # last_tag = get_repo_tags(chronologically_sorted=True)[-1]
+    setup() # (last_tag.name)

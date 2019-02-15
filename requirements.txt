@@ -7,4 +7,4 @@ sphinx_rtd_theme
 setuptools
 wheel
 gitpython
-bumpversion
+bump2version

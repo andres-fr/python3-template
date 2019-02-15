@@ -396,7 +396,19 @@ This repo's docs are being deployed to https://python3-template.readthedocs.io
 
 ### Tagging:
 
-Once we reach a given milestone, we can package and deploy the code at its current state. For that, you label that specific commit with a tag (see `https://git-scm.com/book/en/v2/Git-Basics-Tagging`). It is encouraged that tags follow semantic versioning (see `https://semver.org/`). Apart from the possibilities that the `git` CLI offers, this repository contains a python script that allows to perform tag creation from terminal. Its contents also allow and ilustrate how to do it within Python:
+Once we reach a given milestone, we can package and deploy the code at its current state. For that, you label that specific commit with a tag (see `https://git-scm.com/book/en/v2/Git-Basics-Tagging`). It is encouraged that tags follow semantic versioning (see `https://semver.org/`).
+
+There are many different ways to accomplish that: the `git` CLI and `gitpython` package being two popular ones. Here we use the `bumpversion` third-party library:
+
+```
+
+```
+
+
+
+to the *Releases* tab, under the tag name and message. We want to customize this behaviour to also include the wheel and source distribution (see `https://developer.github.com/v3/repos/releases/#create-a-release` for details):
+
+Apart from the possibilities that the `git` CLI offers, this repository contains a python script that allows to perform tag creation from terminal. Its contents also allow and ilustrate how to do it within Python:
 
 
 ```
@@ -425,7 +437,11 @@ pip uninstall dist/dummypackage_dummyname-0.0.1-py3-none-any.whl
 
 ### GitHub releases:
 
-Pushing a tag triggers GitHub to automatically add a snapshot of the repo as `.zip` and `.tar.gz` to the *Releases* tab, under the tag name and message. We want to customize this behaviour to also include the wheel and source distribution (see `https://developer.github.com/v3/repos/releases/#create-a-release` for details):
+When pushed, GitHub automatically associates each tag with a corresponding *Release*, That holds the tag name and message, as well as a snapshot of the repo as `.zip` and `.tar.gz`. We want to add two things to this default behaviour:
+
+1. Automatic changelog via `HISTORY.rst`
+2. Pip-installable package in [wheel](https://pythonwheels.com/) format.
+
 
 
 ### Publish
