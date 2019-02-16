@@ -43,10 +43,10 @@ jobs:
 
     # If all tests pass, go on to the build stage
     - stage: build
-      name: "Build Package"
       script: python setup.py clean --all && python setup.py sdist bdist_wheel
-      name: "Build Autodocs"
+      name: "Build Package"
     - script: make -C docs clean && make -C docs html && make -C docs latexpdf
+      name: "Build Autodocs"
 
     # If building was successful, deploy to various platforms
     - stage: deploy
@@ -70,3 +70,11 @@ jobs:
   # on:
   #   tags: true
   #   repo: andres-fr/python3-template
+
+
+# # You can specify the order for stages in the section stages:
+# stages:
+#   #- test_preparation
+#   - tests
+#   - build
+#   - deploy
