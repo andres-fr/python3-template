@@ -569,3 +569,7 @@ checking consistency... /home/a9fb1e/github-work/python3-template/docs/source/mo
 * add online codecov? https://codecov.io/
 
 * Format HISTORY and add content to github releases (and pypi?) automatically via CLI and travis
+
+* Travis says skipping because no tag... BUT there is tag! AND it is actually deploying!?
+
+*  Github releases aren't including the wheel and sdist binaries
