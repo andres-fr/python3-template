@@ -51,6 +51,7 @@ jobs:
     # If building was successful, deploy to various platforms
     - stage: deploy
       script: echo "Deploying to GitHub releases ..."
+      name: "Deploy to GitHub releases"
       deploy:
         provider: releases
         skip_cleanup: true
