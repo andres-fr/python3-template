@@ -391,34 +391,33 @@ This repo's docs are being deployed to https://python3-template.readthedocs.io
 
 
 
-# Deployment:
+# Build and Deploy:
 
 
 ### Tagging:
 
-Once we reach a given milestone, we can label that specific commit with a version tag (like `v1.0.13`). The basics are discussed here: `https://git-scm.com/book/en/v2/Git-Basics-Tagging`. Especially, **note that tags have to be explicitly included in the push**: `git push --follow-tags`. If you want this to be the default behaviour, call `git config --global push.followTags true`, after that every regular `git push` will also push all the valid existing tags. This project assumes that tags are implicitly pushed.
+Once we reach a given milestone, we can label that specific commit with a version tag (like `v1.0.13`). The basics are discussed here: `https://git-scm.com/book/en/v2/Git-Basics-Tagging`. Especially, **note that tags have to be explicitly included in the push**: `git push --follow-tags`, otherwise, they won't be sent to the server. If you want this to be the default behaviour (as assumed in this project), call `git config --global push.followTags true`, after that every regular `git push` will also push all the valid existing tags.
 
-There are different ways of handling the tag system, the `git`CLI and `gitpython` being very popular among them. Since we want here very specific functionality, we use the `bump2version` third-party library: It allows to automatically increment and set the version tag following semantic versioning (see `https://semver.org/`), which is highly encouraged. It works as follows:
+There are different ways of handling the tag system, the `git` CLI and `gitpython` being very popular among them. Since we want here very specific functionality, we use the `bump2version` third-party library: It allows to automatically increment and set the version tag following semantic versioning (see `https://semver.org/`), which is highly encouraged. It works as follows:
 
 * The `.bumpversion.cfg` file holds the current version and the configuration.
 * Calling `bump2version <ADVANCE>` will automatically update the version in the `.bumpversion.cfg` and `setup.py` files, and add the corresponding tag to the git repo. The `<ADVANCE>` parameter can be either **major**, **minor**, or **patch**.
 
-So we just need to start our repo by setting the desired version in the config file (usually `0.1.0`), and then commit normally. The process of adding a tag will be something like:
+So we just need to start our repo by setting the desired version in the `.bumpversion.cfg` file (usually `0.1.0`), and then commit normally. The process of adding a tag will be something like:
 
 ```
 # after finished making all changes and saving all files (to avoid 'Git working directory is not clean' error):
 git add . # or whatever you want to add
 git commit -m "finished implementing the last feature we needed"
 bump2version major
-git push
 ```
 
-The commit will be processed normally, and the tag will automatically appear under the GitHub *Releases* tab, holding a snapshot of the current repo's state as `.zip` and `.tar.gz`.
+After `bump2version`, doing a `git push` will send the commit to the server as usual, and the tag will automatically appear under the GitHub *Releases* tab, holding a snapshot of the current repo's state as `.zip` and `.tar.gz`.
 
 
-### Packaging and Local Install:
+### Build and Local Install:
 
-The `setup.py` script will automatically detect a tag pointing to the latest commit, and build the package in *source dist* (`sdist`) and *wheel* forms. The package will be in the `dist` directory, and some files will be generated into the `build` directory too. **Important**: remember to adapt the global variables in the script to your repo's needs.
+The `setup.py` script will build the package in *source dist* (`sdist`) and *wheel* forms. The package will be in the `dist` directory, and some files will be generated into the `build` directory too. **Important**: remember to adapt the variables in the `setup` function call to your repo's needs (except `version`, which as we seen is handled by `bump2version`).
 
 ```
 # optionally clean cache to prevent side effects
@@ -434,34 +433,33 @@ pip install -U dist/dummypackage_dummyname-0.0.1-py3-none-any.whl
 pip uninstall dist/dummypackage_dummyname-0.0.1-py3-none-any.whl
 ```
 
+Note that in principle it is not necessary to build the package manually if you have automated the deployment via Travis.
+
 ### GitHub Release:
 
-We soo that tags get automatically tracked by GitHub. But for each release, we want to add two things to this default behaviour:
+We saw that tags get automatically tracked by GitHub. But for each release, we want to add two things to this default behaviour:
 
 1. Specify a changelog
 2. Pip-installable package in [wheel](https://pythonwheels.com/) format.
 
-This can be performed manually in the
+This can be performed manually via browser in the GitHub webpage, and also via CLI as follows:
 
 ```
-now did some change and commit again:
-```
-
-to the *Releases* tab, under the tag name and message. We want to customize this behaviour to also include the wheel and source distribution (see `https://developer.github.com/v3/repos/releases/#create-a-release` for details):
-
-
-
-
-### Publish
-
 TODO
+```
+
+Note that in principle it is not necessary to deploy manually if you have automated the deployment via Travis.
+
+### PyPI Release:
 
 
+The built package can also be released to *PyPI*, a popular global repository for Python packages. The following command uploads then everything in the `dist` directory. You will need to provide your *PyPI* credentials (make a user if you don't have one):
 
+```
+twine upload dist/*
+```
 
-
-
-
+Note that in principle it is not necessary to deploy manually if you have automated the deployment via Travis.
 
 
 
@@ -522,8 +520,22 @@ By default, Travis starts a new virtual machine **from scratch for every single 
 
 3. Now both sides know about each other, make sure you understand the `.travis.yml` file and customize it as desired.
 
+4. For deployment, Travis will need your user credentials. As it wouldn't be safe to distribute your passwords in plain text, Travis offers you the possibility of encrypting them. In this project, we will need credentials for ***PyPI** and **GitHub**:
 
 
+
+#### GitHub releases config:
+
+Travis can be configured to upload to GitHub releases by running `travis setup releases`. If you do this yourself, be careful because this will reformat the `travis.yml` file, deleting all comments and blank lines (although the functionality won't be affected). A temporary backup will help with this.
+
+In the repo root, run `travis setup releases` and follow the steps:
+
+1. Confirm repo name
+2. Provide GitHub credentials
+3. Deploy only from ...? YES
+4. Encrypt API key: yes
+
+In any case, the current `travis.yml` already contains most of the information. You will, in any case, have to replace the credentials with your own ones. You can see how to do that here: `https://docs.travis-ci.com/user/deployment/releases#authenticating-with-an-oauth-token`.
 
 # TODO:
 

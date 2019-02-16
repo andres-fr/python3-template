@@ -6,9 +6,8 @@ When called, this script inspects the current git repo and updates the
 HISTORY.rst changelog at the repo root with the latest changes.
 """
 
-import sys
-from os.path import abspath, dirname
-
+# import sys
+# from os.path import abspath, dirname
 
 
 # """ Visit https://developer.github.com/v3/repos/statistics/
@@ -77,8 +76,7 @@ from os.path import abspath, dirname
 #             pad = '            '
 
 
-
-#     print( D['commit']['author']['date'][:10] + ' ' + D['commit']['message'] )
+#     print( D['commit']['author']['date'][:10]+' ' + D['commit']['message'] )
 
 #     last_date_str = date_str
 #     last_author_str = author_str
