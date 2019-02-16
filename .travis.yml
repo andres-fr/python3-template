@@ -27,7 +27,9 @@ install: pip install -r requirements.txt
 
 addons:
   apt:
-    packages: latexmk
+    packages:
+      - latexmk
+      - texlive-fonts-recommended
   # homebrew:
   #   packages: ...
 
@@ -36,7 +38,7 @@ jobs:
   include:
     # Perform all needed tests to ensure repo quality. All scripts
     # in a stage are done in parallel. Stages are done sequentially.
-    - stage: tests
+    - stage: test
       name: "Check Code Style"
       script: python -m flake8
     - script: python -m unittest utest/tautology.py
@@ -83,6 +85,6 @@ jobs:
 # # You can specify the order for stages in the section stages:
 # stages:
 #   #- test_preparation
-#   - tests
+#   - test
 #   - build
 #   - deploy
