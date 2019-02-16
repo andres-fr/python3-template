@@ -87,6 +87,6 @@ jobs:
 
 # Here you can specify the order for stages, or skip some
 stages:
-  # - test
+  - test
   - build
   - deploy
