@@ -22,7 +22,7 @@ This readme has been developed for Ubuntu-like systems, but the Python examples 
 
 # Dependencies:
 
-See `requirements.txt`. Also, if not using `conda`, add this line to your .bashrc to allow executing binaries installed with `pip --user`:
+Some general dependencies are listed under the `addons` tag in the `.travis.yml` file. See `requirements.txt` for the python-specific dependencies. Also, if not using `conda`, add this line to your .bashrc to allow executing binaries installed with `pip --user`:
 
 ```bash
 export PATH=${PATH}:$HOME/.local/bin
@@ -526,7 +526,7 @@ By default, Travis starts a new virtual machine **from scratch for every single 
 
 #### GitHub releases config:
 
-Travis can be configured to upload to GitHub releases by running `travis setup releases`. If you do this yourself, be careful because this will reformat the `travis.yml` file, deleting all comments and blank lines (although the functionality won't be affected). A temporary backup will help with this.
+Travis can be configured to upload to GitHub releases by running `travis setup releases`. If you do this yourself, be careful because **this will reformat the `travis.yml` file**, deleting all comments and blank lines (although the functionality won't be affected). A temporary backup will help with this.
 
 In the repo root, run `travis setup releases` and follow the steps:
 
@@ -535,7 +535,18 @@ In the repo root, run `travis setup releases` and follow the steps:
 3. Deploy only from ...? YES
 4. Encrypt API key: yes
 
-In any case, the current `travis.yml` already contains most of the information. You will, in any case, have to replace the credentials with your own ones. You can see how to do that here: `https://docs.travis-ci.com/user/deployment/releases#authenticating-with-an-oauth-token`.
+Conveniently, this repo's `travis.yml` already provides structure for releasing into GitHub. You will, in any case, have to replace the credentials with your own ones. You can see how to do that here: `https://docs.travis-ci.com/user/deployment/releases#authenticating-with-an-oauth-token`.
+
+#### PyPI release config:
+
+As with GitHub releases, the `.travis.yml` file already provides structure for deploying to PyPI. You just have to replace the credentials with your own. To encrypt your password, use the following command (more info here: `https://docs.travis-ci.com/user/encryption-keys/`). Again, be careful because **this will reformat the `travis.yml` file**, deleting all comments and blank lines (although the functionality won't be affected). A temporary backup will help with this:
+
+```
+travis encrypt <PASSWORD> --add deploy.password
+```
+
+For that, make sure you installed the Travis CLI (see `https://github.com/travis-ci/travis.rb#installation`).
+
 
 # TODO:
 

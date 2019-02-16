@@ -62,7 +62,7 @@ jobs:
     # If building was successful, deploy to various platforms
     - stage: deploy
       script: echo "Deploying to GitHub releases..."
-      name: "Deploy to GitHub releases"
+      name: "Deploy to GitHub Releases"
       deploy:
         provider: releases
         skip_cleanup: true
@@ -72,16 +72,21 @@ jobs:
         file: dist/*
         on:
           tags: true
+          branch: master
           repo: andres-fr/python3-template
-  # #
-  # provider: pypi
-  # skip_cleanup: true
-  # user: "fr_andres"
-  # password:
-  #   secure: "Your encrypted password"
-  # on:
-  #   tags: true
-  #   repo: andres-fr/python3-template
+      #
+      script: echo "Deploying to PyPI..."
+      name: "Deploy to PyPI"
+      deploy:
+        provider: pypi
+        skip_cleanup: true
+        user: "fr_andres"
+        password:
+          secure: qpDiwstuH9zjNAqeLUmn9s+AOny+eKYGBAWP3qrWwRi2gx+w0KQwk+uz+E/FgJp6lkPzAeV+UqMCz/y03EDK+dRdkbz7C5RrQFechHZM+Y1adPXfrIQvF3YdCzCRaLUF7V0/3gED6yGvFEquZLwxHSyM0GCUc8LyJnSuPDocFe7E2jiPJ+R8HFBD6dBqz4UFnriCiLKFj4//MJLdXu1Ad0SITW8XOrpHO/SrvWJ5PT2ilRcUPbpENqxSryG570CNUYyEE71jfxjOsPYAINZmiNnDCkYPaRXyCnPsNOgSwvqGLMr8cmUCjkhhfg/FGmztWQdON/cbdxGz38JcrynFeg1x2pCJ3Nwf4dIPrr3X5EFPfng0eJvVMLI8d6ne6dZvdRgSelevP09l4+6cF6gI12/OKxhn6WmGaADcWXnQQ6+a61n0rsObZadcGCR8ZsPw9QUJx1CHIYmBuaEAtMVgE4tDuXundBQa8mAbV4cgfDyXQ+Y0/zm52eVGAQVvwImWPvwEq5KnhsOoHgaR9nKtnFyENRnbFVX002QNmprahjPRi+yL2j/LIJg/7h2kmWolbuX0jkhpvgDmg5Sri2h7aqrYubM4Ko/GnjNnbZX36ePu453K97tHxl7KuFXX6TFzYwM2DRtD+/RY39gYqI49Mt9CYrUaJMUqZcPNn82ypQQ=
+        on:
+          tags: true
+          branch: master
+          repo: andres-fr/python3-template
 
 
 # Here you can specify the order for stages, or skip some
@@ -89,3 +94,7 @@ stages:
   # - test
   - build
   - deploy
+
+
+deploy:
+  password:
