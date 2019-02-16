@@ -29,7 +29,7 @@ addons:
   apt:
     packages:
       - latexmk
-      - texlive-fonts-recommended
+      - texlive-latex-recommended # texlive-fonts-recommended
   # homebrew:
   #   packages: ...
 
