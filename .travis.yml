@@ -24,6 +24,13 @@ os:
 
 install: pip install -r requirements.txt
 
+
+addons:
+  apt:
+    packages: latexmk
+  # homebrew:
+  #   packages: ...
+
 # here we define the stages. stage ordering will come later
 jobs:
   include:
@@ -50,7 +57,7 @@ jobs:
 
     # If building was successful, deploy to various platforms
     - stage: deploy
-      script: echo "Deploying to GitHub releases ..."
+      script: echo "Deploying to GitHub releases..."
       name: "Deploy to GitHub releases"
       deploy:
         provider: releases

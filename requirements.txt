@@ -4,7 +4,6 @@ snakeviz
 memory_profiler
 sphinx
 sphinx_rtd_theme
-latexmk.py
 bump2version
 setuptools
 wheel
