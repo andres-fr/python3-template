@@ -31,6 +31,7 @@ addons:
       - latexmk
       - texlive-fonts-recommended
       - texlive-latex-recommended
+      - texlive-latex-extra
   # homebrew:
   #   packages: ...
 
