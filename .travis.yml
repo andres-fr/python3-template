@@ -75,7 +75,7 @@ jobs:
           branch: master
           repo: andres-fr/python3-template
       #
-      script: echo "Deploying to PyPI..."
+    - script: echo "Deploying to PyPI..."
       name: "Deploy to PyPI"
       deploy:
         provider: pypi
