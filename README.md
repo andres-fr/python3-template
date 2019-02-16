@@ -469,7 +469,7 @@ Note that in principle it is not necessary to deploy manually if you have automa
 
 ### Intro:
 
-In the context of of CD/CI, a git repository (or any other similar object to automatize tasks on) is regarded as a **material**, with its specific set of **trigger actions** (e.g. commit or pull request in a git repo, or certain API requests in a custom REST system).
+In the context of of CD/CI, a git repository (or any other similar object to automatize tasks on) is regarded as a **material**, with its specific set of **trigger actions** (e.g. commit or pull request in a git repo, or certain API requests in a custom REST system). It probably helps to think of materials as *classes*, and the actions as their *methods*.
 
 For each of those actions, a **CD/CI pipeline** may be defined, which will be executed by the CD/CI system upon trigger by some event. Depending on the CI system, the pipelines allow some complexity like branching, but it is best practice to keep them as simple as possible.
 
@@ -509,7 +509,7 @@ For that, Travis implements two basic concepts, **stages** and **jobs**: A stage
 
 Each job can be mapped to a "script", which is a call to a program. If the script returns a nonzero status, deployment is considered a failure, and the build will be marked as “errored”.
 
-By default, Travis starts a new virtual machine **from scratch for every single job**. All the required dependencies have to be installed prior to running the jobs. This can take a while, so it is helpful to design the CI pipeline in a way that minimizes overhead. Some of the dependencies can be shared across jobs using the `cache` keyword.
+By default, Travis starts a new virtual machine **from scratch for every single job**. All the required dependencies have to be installed prior to running the jobs. This can take a while, so it is helpful to design the CI pipeline in a way that minimizes overhead. Some of the dependencies can be shared across jobs using the `cache` keyword. Additionaly, the file cleanup that happens prior to some tasks can be also skipped.
 
 
 ### Steps:
@@ -520,7 +520,7 @@ By default, Travis starts a new virtual machine **from scratch for every single 
 
 3. Now both sides know about each other, make sure you understand the `.travis.yml` file and customize it as desired.
 
-4. For deployment, Travis will need your user credentials. As it wouldn't be safe to distribute your passwords in plain text, Travis offers you the possibility of encrypting them. In this project, we will need credentials for ***PyPI** and **GitHub**:
+4. For deployment, Travis will need your user credentials. As it wouldn't be safe to distribute your passwords in plain text, Travis offers you the possibility of encrypting them. In this project, we will need credentials for **PyPI** and **GitHub**:
 
 
 
@@ -532,8 +532,8 @@ In the repo root, run `travis setup releases` and follow the steps:
 
 1. Confirm repo name
 2. Provide GitHub credentials
-3. Deploy only from ...? YES
-4. Encrypt API key: yes
+3. Deploy only from ... -> yes
+4. Encrypt API key -> yes
 
 Conveniently, this repo's `travis.yml` already provides structure for releasing into GitHub. You will, in any case, have to replace the credentials with your own ones. You can see how to do that here: `https://docs.travis-ci.com/user/deployment/releases#authenticating-with-an-oauth-token`.
 
@@ -568,7 +568,4 @@ checking consistency... /home/a9fb1e/github-work/python3-template/docs/source/mo
 
 * add online codecov? https://codecov.io/
 
-
-* Finish deploy to PyPI part
-* Make tagged commits trigger travis build (and pypi deploy with pwd?)
-* add github releases automatically
+* Format HISTORY and add content to github releases (and pypi?) automatically via CLI and travis
