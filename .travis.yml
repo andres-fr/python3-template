@@ -82,9 +82,8 @@ jobs:
   #   repo: andres-fr/python3-template
 
 
-# # You can specify the order for stages in the section stages:
-# stages:
-#   #- test_preparation
-#   - test
-#   - build
-#   - deploy
+# Here you can specify the order for stages, or skip some
+stages:
+  # - test
+  - build
+  - deploy
