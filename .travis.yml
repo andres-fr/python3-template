@@ -90,7 +90,3 @@ stages:
   # - test
   - build
   - deploy
-
-
-deploy:
-  password:
