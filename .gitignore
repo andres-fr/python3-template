@@ -66,7 +66,7 @@ instance/
 # Sphinx documentation
 docs/_build/doctrees
 docs/_build/latex/*
-!docs/_build/latex/dummypackage.pdf
+!docs/_build/latex/*.pdf
 
 # PyBuilder
 target/
