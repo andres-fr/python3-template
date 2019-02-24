@@ -19,7 +19,7 @@ def setup():
     #
     setuptools.setup(
         name="dummypackage-dummyname",
-        version="0.9.0",
+        version="0.9.1",
         author="Dummy Name",
         author_email="dd@dummysolutions.com",
         description="A dummy package",
