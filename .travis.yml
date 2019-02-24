@@ -56,7 +56,7 @@ jobs:
     - stage: build
       script: python setup.py clean --all && python setup.py sdist bdist_wheel
       name: "Build Package"
-    - script: make -C docs clean && make -C docs html && make -C docs latexpdf
+    - script: bash ci_scripts/make_sphinx_docs.sh
       name: "Build Autodocs"
 
     # If building was successful, deploy to various platforms

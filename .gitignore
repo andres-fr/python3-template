@@ -64,9 +64,9 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/build/doctrees
-docs/build/latex/*
-!docs/build/latex/dummypackage.pdf
+docs/_build/doctrees
+docs/_build/latex/*
+!docs/_build/latex/dummypackage.pdf
 
 # PyBuilder
 target/
