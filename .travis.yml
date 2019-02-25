@@ -33,7 +33,7 @@ branches:
   only:
   - master
   # this is needed for tag push actions (https://github.com/travis-ci/travis-ci/issues/8518#issuecomment-333489268)
-  # - /^v.*$/
+  - /^v.*$/
 
 #  https://docs.travis-ci.com/user/multi-os/
 os:
@@ -94,7 +94,7 @@ jobs:
           file: "$GH_RELEASES_ASSET_PATH"
           on:
             tags: true
-            branch: master
+            # branch: master # already filtered out in the "branches" section
             repo: "$REPO_NAME"
         - provider: pypi
           skip_cleanup: true
@@ -103,7 +103,7 @@ jobs:
             secure: "$PYPI_PASSWORD_SECURE"
           on:
             tags: true
-            branch: master
+            # branch: master # already filtered out in the "branches" section
             repo: "$REPO_NAME"
 
 

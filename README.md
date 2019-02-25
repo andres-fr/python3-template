@@ -537,8 +537,6 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 
 * improve `create_docs.sh`: **it should succeed only if everything succeeds**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
 
-* Read the docs stuck on 1.0.0?
-
 * https://github.com/travis-ci/dpl/issues/155
 
 * Update this readme
