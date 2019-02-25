@@ -2,9 +2,11 @@
 
 
 r"""
-Main init file docstring. It exemplifies the usage of `restructured text
-<http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html>`_,
- like:
+| Main init file docstring.
+| It exemplifies the usage of
+  `restructured text
+  <http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html>`_,
+  like:
 
 * *Italics*
 * **Bold**
@@ -14,7 +16,9 @@ Main init file docstring. It exemplifies the usage of `restructured text
 * ``Inline literals``
 * Parameter fields: see class and method docstrings.
 
-
+| Note that lines above 80 characters would break ``flake8`` and
+  therefore have to be wrapped. This can be achieved with ``|`` blocks.
+| This is a new line.
 
 #######################
 Section about sections:
@@ -38,6 +42,64 @@ Or, in other words:
 .. math::
 
    \sum_{k=1}^{\infty} k = -\frac{1}{12}
+
+
+Emphasis:
+=========
+
+.. note:: The sum of all parameters cannot exceed infinity
+
+.. warning::
+   If the sum of all parameters exceeds infinity, behaviour is undefined!
+
+
+Function descriptions:
+======================
+
+Sphinx formatting:
+------------------
+
+.. function:: add(a, b=None)
+
+   This is a cool function.
+
+   :param a: a number
+   :param b: another number
+   :returns: ``a+b``. If b is none, returns ``a``
+   :type a: int or float
+   :type b: int, float or None
+   :rtype: integer or float
+   .. note:: Neither ``a`` nor ``b`` can be infinity!
+
+
+Google formatting:
+------------------
+
+This function does something.
+
+Args:
+   name (str):  The name to use.
+
+Kwargs:
+   state (bool): Current state to be in.
+
+Returns:
+   int.  The return code::
+
+      0 -- Success!
+      1 -- No good.
+      2 -- Try again.
+
+Raises:
+   AttributeError, KeyError
+
+Usage example:
+
+>>> print public_fn_with_googley_docstring(name='foo', state=None)
+0
+
+BTW, this always returns 0.  **NEVER** use with :class:`MyPublicClass`.
+
 
 
 #################

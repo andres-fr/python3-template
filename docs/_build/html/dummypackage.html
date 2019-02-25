@@ -95,6 +95,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-dummypackage">Module contents</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#section-about-sections">Section about sections:</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#subsection">Subsection:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#emphasis">Emphasis:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-descriptions">Function descriptions:</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#other-structures">Other structures:</a></li>
@@ -206,15 +208,31 @@
 <dl class="method">
 <dt id="dummypackage.foo_module.Foo.get_result">
 <code class="descname">get_result</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dummypackage/foo_module.html#Foo.get_result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dummypackage.foo_module.Foo.get_result" title="Permalink to this definition">¶</a></dt>
-<dd><p>Basic getter.
-:returns: the field stored in <code class="docutils literal notranslate"><span class="pre">self._result</span></code></p>
+<dd><p>This function does something.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a number stored in <code class="docutils literal notranslate"><span class="pre">self._result</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">integer or float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="dummypackage.foo_module.Foo.loop">
 <code class="descname">loop</code><span class="sig-paren">(</span><em>times</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dummypackage/foo_module.html#Foo.loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dummypackage.foo_module.Foo.loop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Restart result and run computation a number of times.
-:param times: The number of times, expected non-negative int.</p>
+<dd><p>Restart result and run computation a number of times.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>times</strong> (<em>int</em>) – non-negative number.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -222,9 +240,12 @@
 </div>
 <div class="section" id="module-dummypackage">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dummypackage" title="Permalink to this headline">¶</a></h2>
-<p>Main init file docstring. It exemplifies the usage of <a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">restructured text</a>,</p>
-<blockquote>
-<div>like:</div></blockquote>
+<div class="line-block">
+<div class="line">Main init file docstring.</div>
+<div class="line">It exemplifies the usage of
+<a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">restructured text</a>,
+like:</div>
+</div>
 <ul class="simple">
 <li><em>Italics</em></li>
 <li><strong>Bold</strong></li>
@@ -240,6 +261,11 @@
 <li><code class="docutils literal notranslate"><span class="pre">Inline</span> <span class="pre">literals</span></code></li>
 <li>Parameter fields: see class and method docstrings.</li>
 </ul>
+<div class="line-block">
+<div class="line">Note that lines above 80 characters would break <code class="docutils literal notranslate"><span class="pre">flake8</span></code> and
+therefore have to be wrapped. This can be achieved with <code class="docutils literal notranslate"><span class="pre">|</span></code> blocks.</div>
+<div class="line">This is a new line.</div>
+</div>
 <div class="section" id="section-about-sections">
 <h3>Section about sections:<a class="headerlink" href="#section-about-sections" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -261,6 +287,77 @@
 <div class="math">
 <p><img src="_images/math/320d4b4698a772cc1289aeee510b96e6f9edc7a9.png" alt="\sum_{k=1}^{\infty} k = -\frac{1}{12}"/></p>
 </div></div>
+<div class="section" id="emphasis">
+<h4>Emphasis:<a class="headerlink" href="#emphasis" title="Permalink to this headline">¶</a></h4>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The sum of all parameters cannot exceed infinity</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If the sum of all parameters exceeds infinity, behaviour is undefined!</p>
+</div>
+</div>
+<div class="section" id="function-descriptions">
+<h4>Function descriptions:<a class="headerlink" href="#function-descriptions" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="sphinx-formatting">
+<h5>Sphinx formatting:<a class="headerlink" href="#sphinx-formatting" title="Permalink to this headline">¶</a></h5>
+<dl class="function">
+<dt id="dummypackage.add">
+<code class="descclassname">dummypackage.</code><code class="descname">add</code><span class="sig-paren">(</span><em>a</em>, <em>b=None</em><span class="sig-paren">)</span><a class="headerlink" href="#dummypackage.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a cool function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>int</em><em> or </em><em>float</em>) – a number</li>
+<li><strong>b</strong> (<em>int</em><em>, </em><em>float</em><em> or </em><em>None</em>) – another number</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><code class="docutils literal notranslate"><span class="pre">a+b</span></code>. If b is none, returns <code class="docutils literal notranslate"><span class="pre">a</span></code></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">integer or float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Neither <code class="docutils literal notranslate"><span class="pre">a</span></code> nor <code class="docutils literal notranslate"><span class="pre">b</span></code> can be infinity!</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="google-formatting">
+<h5>Google formatting:<a class="headerlink" href="#google-formatting" title="Permalink to this headline">¶</a></h5>
+<p>This function does something.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>name (str):  The name to use.</dd>
+<dt>Kwargs:</dt>
+<dd>state (bool): Current state to be in.</dd>
+<dt>Returns:</dt>
+<dd><p class="first">int.  The return code:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span>0 -- Success!
+1 -- No good.
+2 -- Try again.
+</pre></div>
+</div>
+</dd>
+<dt>Raises:</dt>
+<dd>AttributeError, KeyError</dd>
+</dl>
+<p>Usage example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">public_fn_with_googley_docstring</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<p>BTW, this always returns 0.  <strong>NEVER</strong> use with <code class="xref py py-class docutils literal notranslate"><span class="pre">MyPublicClass</span></code>.</p>
+</div>
+</div>
 </div>
 <div class="section" id="other-structures">
 <h3>Other structures:<a class="headerlink" href="#other-structures" title="Permalink to this headline">¶</a></h3>

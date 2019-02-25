@@ -176,7 +176,9 @@
 <div class="viewcode-block" id="Foo.loop"><a class="viewcode-back" href="../../dummypackage.html#dummypackage.foo_module.Foo.loop">[docs]</a>    <span class="k">def</span> <span class="nf">loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">times</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Restart result and run computation a number of times.</span>
-<span class="sd">        :param times: The number of times, expected non-negative int.</span>
+
+<span class="sd">        :param times: non-negative number.</span>
+<span class="sd">        :type times: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_result</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
@@ -184,9 +186,15 @@
 
 <div class="viewcode-block" id="Foo.get_result"><a class="viewcode-back" href="../../dummypackage.html#dummypackage.foo_module.Foo.get_result">[docs]</a>    <span class="k">def</span> <span class="nf">get_result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Basic getter.</span>
-<span class="sd">        :returns: the field stored in ``self._result``</span>
+<span class="sd">        This function does something.</span>
+
+<span class="sd">        :returns: a number stored in ``self._result``</span>
+<span class="sd">        :rtype: integer or float</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># &quot;&quot;&quot;</span>
+        <span class="c1"># Basic getter.</span>
+        <span class="c1"># :returns: the field stored in ``self._result``</span>
+        <span class="c1"># &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span></div></div>
 </pre></div>
 

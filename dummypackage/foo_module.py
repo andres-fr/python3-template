@@ -28,7 +28,9 @@ class Foo(object):
     def loop(self, times):
         """
         Restart result and run computation a number of times.
-        :param times: The number of times, expected non-negative int.
+
+        :param times: non-negative number.
+        :type times: int
         """
         self._result = 0
         for i in range(times):
@@ -36,7 +38,13 @@ class Foo(object):
 
     def get_result(self):
         """
-        Basic getter.
-        :returns: the field stored in ``self._result``
+        This function does something.
+
+        :returns: a number stored in ``self._result``
+        :rtype: integer or float
         """
+        # """
+        # Basic getter.
+        # :returns: the field stored in ``self._result``
+        # """
         return self._result
