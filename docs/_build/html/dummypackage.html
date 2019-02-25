@@ -27,7 +27,9 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dummypackage.nested package" href="dummypackage.nested.html" />
+    <link rel="prev" title="Welcome to dummypackage’s documentation!" href="index.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -80,18 +82,28 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">dummypackage package</a><ul>
-<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-dummypackage.bar_module">dummypackage.bar_module module</a></li>
-<li><a class="reference internal" href="#module-dummypackage.foo_module">dummypackage.foo_module module</a></li>
-<li><a class="reference internal" href="#module-dummypackage">Module contents</a></li>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">dummypackage package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dummypackage.nested.html">dummypackage.nested package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dummypackage.bar_module">dummypackage.bar_module module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dummypackage.foo_module">dummypackage.foo_module module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dummypackage">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#section-about-sections">Section about sections:</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#subsection">Subsection:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#other-structures">Other structures:</a></li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+</ul>
+
             
           
         </div>
@@ -194,13 +206,15 @@
 <dl class="method">
 <dt id="dummypackage.foo_module.Foo.get_result">
 <code class="descname">get_result</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dummypackage/foo_module.html#Foo.get_result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dummypackage.foo_module.Foo.get_result" title="Permalink to this definition">¶</a></dt>
-<dd><p>Basic getter.</p>
+<dd><p>Basic getter.
+:returns: the field stored in <code class="docutils literal notranslate"><span class="pre">self._result</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="dummypackage.foo_module.Foo.loop">
 <code class="descname">loop</code><span class="sig-paren">(</span><em>times</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dummypackage/foo_module.html#Foo.loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dummypackage.foo_module.Foo.loop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Restart result and run computation a number of times.</p>
+<dd><p>Restart result and run computation a number of times.
+:param times: The number of times, expected non-negative int.</p>
 </dd></dl>
 
 </dd></dl>
@@ -208,8 +222,146 @@
 </div>
 <div class="section" id="module-dummypackage">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dummypackage" title="Permalink to this headline">¶</a></h2>
-<p><a href="#id1"><span class="problematic" id="id2">**</span></a>* DUMMYPACKAGE **</p>
-<p>Main init file docstring</p>
+<p>Main init file docstring. It exemplifies the usage of <a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">restructured text</a>,</p>
+<blockquote>
+<div>like:</div></blockquote>
+<ul class="simple">
+<li><em>Italics</em></li>
+<li><strong>Bold</strong></li>
+<li><dl class="first docutils">
+<dt>Numbered and nested lists:</dt>
+<dd><ol class="first last arabic">
+<li>This is a numbered list</li>
+<li>Nested lists have at least three characters indentation</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">Inline</span> <span class="pre">literals</span></code></li>
+<li>Parameter fields: see class and method docstrings.</li>
+</ul>
+<div class="section" id="section-about-sections">
+<h3>Section about sections:<a class="headerlink" href="#section-about-sections" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Surrounding chars have to be at least as long as the title</li>
+<li>No explicit hierarchy, but this recommended: <code class="docutils literal notranslate"><span class="pre">#,</span> <span class="pre">*,</span> <span class="pre">=,</span> <span class="pre">-,</span> <span class="pre">^,</span> <span class="pre">&quot;</span></code> (the first</li>
+</ul>
+<blockquote>
+<div>two with overline).</div></blockquote>
+<div class="section" id="subsection">
+<h4>Subsection:<a class="headerlink" href="#subsection" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt>To exemplify the usage of <img class="math" src="_images/math/6f0c4f2f1d6fa0f53d8d4083d8229a70fc659cd3.png" alt="\text{\LaTeX}"/> and nested quotes, nothing best</dt>
+<dd><p class="first">that the words of Isaac Newton himself:</p>
+<blockquote class="last">
+<div>“If I have seen further it is by standing on the shoulders of Giants.”</div></blockquote>
+</dd>
+</dl>
+<p>Or, in other words:</p>
+<div class="math">
+<p><img src="_images/math/320d4b4698a772cc1289aeee510b96e6f9edc7a9.png" alt="\sum_{k=1}^{\infty} k = -\frac{1}{12}"/></p>
+</div></div>
+</div>
+<div class="section" id="other-structures">
+<h3>Other structures:<a class="headerlink" href="#other-structures" title="Permalink to this headline">¶</a></h3>
+<p>Field lists:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Homer J. Simpson</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Email:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">hjs&#64;compuglobalhypermega.net</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Literal blocks, preceded by double colon:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">literal</span> <span class="n">block</span>
+
+<span class="n">Markups</span> <span class="n">are</span> <span class="o">**</span><span class="ow">not</span><span class="o">**</span> <span class="n">rendered</span> <span class="n">here</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Doctest blocks can be tested by the doc tool:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="go">[1, 1, 2, 6, 24, 120]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">factorial</span><span class="p">(</span><span class="n">long</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="go">[1, 1, 2, 6, 24, 120]</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Grid tables must be indented:</dt>
+<dd><table border="1" class="first last docutils">
+<colgroup>
+<col width="34%" />
+<col width="34%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Header 1</th>
+<th class="head">Header 2</th>
+<th class="head">Header 3</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>body row 1</td>
+<td>column 2</td>
+<td>column 3</td>
+</tr>
+<tr class="row-odd"><td>body row 2</td>
+<td colspan="2">Cells may span columns.</td>
+</tr>
+<tr class="row-even"><td>body row 3</td>
+<td rowspan="2">Cells may
+span rows.</td>
+<td rowspan="2"><ul class="first last simple">
+<li>Cells</li>
+<li>contain</li>
+<li>blocks.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>body row 4</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>Simple table:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="31%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="2">Inputs</th>
+<th class="head">Output</th>
+</tr>
+<tr class="row-even"><th class="head">A</th>
+<th class="head">B</th>
+<th class="head">A or B</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd"><td>False</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr class="row-even"><td>True</td>
+<td>False</td>
+<td>True</td>
+</tr>
+<tr class="row-odd"><td>False</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="row-even"><td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 
@@ -218,6 +370,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dummypackage.nested.html" class="btn btn-neutral float-right" title="dummypackage.nested package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to dummypackage’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

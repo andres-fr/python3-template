@@ -4,7 +4,7 @@ import sys
 MODULE_ROOT_DIR = dirname(dirname(abspath(__file__)))
 # append module root directory to sys.path
 if MODULE_ROOT_DIR not in sys.path:
-    sys.path.append(MODULE_ROOT_DIR)
+    sys.path.insert(0, MODULE_ROOT_DIR)
 
 html_theme = "sphinx_rtd_theme"
 #
@@ -48,7 +48,7 @@ release = '0.9.1'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.mathjax',
+    'sphinx.ext.imgmath',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
 ]
@@ -184,3 +184,4 @@ epub_exclude_files = ['search.html']
 
 
 # -- Extension configuration -------------------------------------------------
+latex_elements = {'extraclassoptions': 'openany,oneside'}
