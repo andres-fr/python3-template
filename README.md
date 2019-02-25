@@ -529,9 +529,8 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 
 ## TODO:
 
-
+* Releases: use a tool like release-it or semantic-release?
 * Format HISTORY and add content to github releases (and pypi?) automatically via CLI and travis
-
 *  Github releases aren't including the wheel and sdist binaries
 
 * improve `create_docs.sh`: **it should succeed only if everything succeedes**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
