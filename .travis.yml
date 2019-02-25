@@ -61,8 +61,8 @@ jobs:
 
     # If building was successful, deploy to various platforms
     - stage: deploy
-      before_script: python setup.py sdist bdist_wheel
-      script: echo "thirdddd>>>>>>>" && ls . && echo "fourthhh>>>>>>>" &&  ls $TRAVIS_BUILD_DIR
+      before_script: python setup.py sdist bdist_wheel # since we are deploying in a proper stage, the repo starts from scratch and needs to rebuild.
+      script: echo ""
       name: "Deploy to GitHub Releases and PyPI"
       deploy:
         - provider: releases

@@ -536,6 +536,10 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 * improve `create_docs.sh`: **it should succeed only if everything succeedes**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
 
 
+* refactor travis config to have all variables (like package name etc) centralized and clear
+
+* Read the docs stuck on 1.0.0?
+
 ## MAYBE TODO:
 
 * add all OS to travis file: for the moment not supported! https://github.com/travis-ci/travis-ci/issues/9744#issuecomment-419426053
