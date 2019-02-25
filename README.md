@@ -537,15 +537,7 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 
 # TODO:
 
-* sphinx autodoc pdf is empty
-
-* reformat all docstrings to the restructured format
-
-* bug sphinx build: toc-tree file?? https://dont-be-afraid-to-commit.readthedocs.io/en/latest/documentation.html
-checking consistency... /home/a9fb1e/github-work/python3-template/docs/source/modules.rst: WARNING: document isn't included in any toctree
-
 * add all OS to travis file: for the moment not supported! https://github.com/travis-ci/travis-ci/issues/9744#issuecomment-419426053
-
 
 * add online codecov? https://codecov.io/
 

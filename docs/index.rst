@@ -1,5 +1,5 @@
 .. dummypackage documentation master file, created by
-   sphinx-quickstart on Mon Feb 25 03:03:12 2019.
+   sphinx-quickstart on Mon Feb 25 03:10:34 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
@@ -7,10 +7,9 @@ Welcome to dummypackage's documentation!
 ========================================
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
    :caption: Contents:
 
-   dummypackage
 
 
 Indices and tables
