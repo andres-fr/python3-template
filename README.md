@@ -529,16 +529,15 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 
 ## TODO:
 
-* Releases: use a tool like release-it or semantic-release?
-* Format HISTORY and add content to github releases (and pypi?) automatically via CLI and travis
-*  Github releases aren't including the wheel and sdist binaries
+* Releases: use a tool like release-it or semantic-release? bumpversion problem: it requires a previous commit, and then commits only 2 small changes. The message provided affects the "tag commit message" only, find a way to edit the proper release title and message. Maybe HISTORY.rst?
 
 * improve `create_docs.sh`: **it should succeed only if everything succeedes**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
-
 
 * refactor travis config to have all variables (like package name etc) centralized and clear
 
 * Read the docs stuck on 1.0.0?
+
+* Update this readme
 
 ## MAYBE TODO:
 
