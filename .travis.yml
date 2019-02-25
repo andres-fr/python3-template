@@ -54,14 +54,14 @@ jobs:
 
     # If all tests pass, go on to the build stage
     - stage: build
-      script: python setup.py clean --all && python setup.py sdist bdist_wheel && echo ">>>>>>>>><" && echo "first>>>>" && ls . && echo "second>>>" && echo $TRAVIS_BUILD_DIR # echo ""
+      script: python setup.py clean --all && python setup.py sdist bdist_wheel && echo ">>>>>>>>><" && echo "first>>>>" && ls . && echo "second>>>" && ls $TRAVIS_BUILD_DIR # echo ""
       name: "Build Package"
     - script: bash ci_scripts/make_sphinx_docs.sh "dummypackage" "Dummy Dumson"
       name: "Build Autodocs"
 
     # If building was successful, deploy to various platforms
     - stage: deploy
-      script: echo ">>>>>>>>><" && ls dist # echo ""
+      script: echo "thirdddd>>>>>>>" && ls . && echo "fourthhh>>>>>>>" &&  ls $TRAVIS_BUILD_DIR
       name: "Deploy to GitHub Releases and PyPI"
       deploy:
         - provider: releases
