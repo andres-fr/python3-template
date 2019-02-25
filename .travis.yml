@@ -38,19 +38,19 @@ addons:
 # here we define the stages. stage ordering will come later
 jobs:
   include:
-    # Perform all needed tests to ensure repo quality. All scripts
-    # in a stage are done in parallel. Stages are done sequentially.
-    - stage: test
-      name: "Check Code Style"
-      script: python -m flake8
-    - script: python -m unittest utest/tautology.py
-      name: "Tautological Test"
-    - script: python ci_scripts/utest_with_coverage.py -p 50.0 # -p is the codecov percent required to pass
-      name: "Unit Testing and Code Coverage"
-    - script: python ci_scripts/memory_benchmark.py -m 512.0 -i 0.05 # -p max 512MB allowed, measuring every 50ms
-      name: "Memory Benchmarking"
-    - script: python ci_scripts/runtime_benchmark.py -m 5.0 # -p max 5s per loop allowed (see script)
-      name: "Runtime Benchmarking"
+    # # Perform all needed tests to ensure repo quality. All scripts
+    # # in a stage are done in parallel. Stages are done sequentially.
+    # - stage: test
+    #   name: "Check Code Style"
+    #   script: python -m flake8
+    # - script: python -m unittest utest/tautology.py
+    #   name: "Tautological Test"
+    # - script: python ci_scripts/utest_with_coverage.py -p 50.0 # -p is the codecov percent required to pass
+    #   name: "Unit Testing and Code Coverage"
+    # - script: python ci_scripts/memory_benchmark.py -m 512.0 -i 0.05 # -p max 512MB allowed, measuring every 50ms
+    #   name: "Memory Benchmarking"
+    # - script: python ci_scripts/runtime_benchmark.py -m 5.0 # -p max 5s per loop allowed (see script)
+    #   name: "Runtime Benchmarking"
 
     # If all tests pass, go on to the build stage
     - stage: build
@@ -87,6 +87,6 @@ jobs:
 
 # Here you can specify the order for stages, or skip some
 stages:
-  - test
+  # - test
   - build
   - deploy
