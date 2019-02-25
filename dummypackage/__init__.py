@@ -32,8 +32,8 @@ Section about sections:
 Subsection:
 ===========
 
-To exemplify the usage of :math:`\text{\LaTeX}` and nested quotes, nothing best
- that the words of Isaac Newton himself:
+| To exemplify the usage of :math:`\text{\LaTeX}` and nested quotes, nothing
+  better than the words of Isaac Newton himself:
 
    "If I have seen further it is by standing on the shoulders of Giants."
 

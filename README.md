@@ -1,7 +1,7 @@
-# python3-template   [![Build Status](https://travis-ci.org/andres-fr/python3-template.svg?branch=master)](https://travis-ci.org/andres-fr/python3-template) [![Documentation Status](https://readthedocs.org/projects/python3-template/badge/?version=latest)](https://python3-template.readthedocs.io/en/latest/?badge=latest)
+# python3-template   [![Build Status](https://travis-ci.org/andres-fr/python3-template.svg?branch=master)](https://travis-ci.org/andres-fr/python3-template) [![PyPI version](https://badge.fury.io/py/dummypackage-dummyname.svg)](https://badge.fury.io/py/dummypackage-dummyname) [![Documentation Status](https://readthedocs.org/projects/python3-template/badge/?version=latest)](https://python3-template.readthedocs.io/en/latest/?badge=latest)
 
 
-Dummy Python3 project providing structure for development, unit testing, runtime/memory benchmarking, PEP8 check, [autodocumentation](https://python3-template.readthedocs.io), and deployment to [PyPI](https://pypi.org/project/dummypackage-dummyname) and [GitHub Releases](https://github.com/andres-fr/python3-template/releases), automated via Travis CI.
+Dummy Python3 project providing structure for development, unit testing, runtime/memory benchmarking, PEP8 check, [autodocumentation](https://python3-template.readthedocs.io), and deployment to [PyPI](https://pypi.org/project/dummypackage-dummyname) and [GitHub Releases](https://github.com/andres-fr/python3-template/releases), automated via [Travis CI](https://travis-ci.org/andres-fr/python3-template).
 
 
 * The actual code is to be developed in the `dummypackage` library, and used in an application like `dummyapp.py`, which can be run with `python dummyapp.py`. **To ensure proper function of the tools, all subdirectories must include an `__init.py__` file**.
@@ -516,6 +516,10 @@ In the repo root, run `travis setup releases` and follow the steps:
 
 Conveniently, this repo's `travis.yml` already provides structure for releasing into GitHub. You will, in any case, have to replace the credentials with your own ones. You can see how to do that here: `https://docs.travis-ci.com/user/deployment/releases#authenticating-with-an-oauth-token`.
 
+Also note that the release can be customized with keywords like `name, body, draft, prerelease`.
+
+`https://docs-staging.travis-ci.com/user/deployment/releases/`.
+
 #### PyPI release config:
 
 As with GitHub releases, the `.travis.yml` file already provides structure for deploying to PyPI. You just have to replace the credentials with your own. To encrypt your password, use the following command (more info here: `https://docs.travis-ci.com/user/encryption-keys/`). Again, be careful because **this will reformat the `travis.yml` file**, deleting all comments and blank lines (although the functionality won't be affected). A temporary backup will help with this:
@@ -531,11 +535,11 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 
 * Releases: use a tool like release-it or semantic-release? bumpversion problem: it requires a previous commit, and then commits only 2 small changes. The message provided affects the "tag commit message" only, find a way to edit the proper release title and message. Maybe HISTORY.rst?
 
-* improve `create_docs.sh`: **it should succeed only if everything succeedes**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
-
-* refactor travis config to have all variables (like package name etc) centralized and clear
+* improve `create_docs.sh`: **it should succeed only if everything succeeds**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
 
 * Read the docs stuck on 1.0.0?
+
+* https://github.com/travis-ci/dpl/issues/155
 
 * Update this readme
 
