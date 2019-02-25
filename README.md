@@ -342,21 +342,13 @@ Note that some "errors" are actually proper design decissions. These can be bypa
 
 # Autodoc:
 
-This project uses `sphinx` and `LaTeX` to automatically generate the docs as HTML and PDF. The following script provides a most automated and flexible doc generation. It only requires the user to provide `projectname` and `author`:
+This project uses `sphinx` and `LaTeX` to automatically generate the docs. The `ci_scripts/maje_sphinx_docs.sh` script provides a most automated and flexible doc generation as HTML and PDF. It only requires the user to provide `projectname` and `author`. At the moment, it doesn't assert for input or environment errors and has to be called from the repo root as follows:
 
 ```
-projectname="dummypackage"
-author="Dummy Dumson"
-rm -r docs/
-version=`grep "current_version" .bumpversion.cfg | cut -d'=' -f2 | xargs`
-sphinx-quickstart -q -p "`echo $projectname`" -a "`echo $author`" --makefile --batchfile --ext-autodoc --ext-mathjax --ext-viewcode --ext-githubpages  -d version="`echo $version`" -d release="`echo $version`" docs/
-# sadly the following is needed to change the html_theme flag
-sed -i '/html_theme/d' docs/conf.py # remove the html_theme line
-sed -i '1r ci_scripts/sphinx_doc_config.txt' docs/conf.py # add the desired config after line 1
-echo "" >> docs/conf.py # add newline at EOF to pass flake8
-sphinx-apidoc -f dummypackage -o docs/
-make -C docs clean && make -C docs latexpdf && make -C docs html
+./ci_scripts/make_sphinx_docs.sh dummypackage "Dummy Dumson"
 ```
+
+It will then generate the files into `docs/_build` (they are also being uploaded to the repository as they aren't filtered by `.gitignore`).
 
 
 Optionally, you can deploy your docs into https://readthedocs.org/ by synchronizing it with your github account. Importing the repository should be straightforward: the page will automatically find your `conf.py` and generate the docs. The docs homepage of the project should provide a badge like the one at the top of this README and a link to the online docs. Note that the advertisment can be removed in the "Admin" tab.
@@ -535,11 +527,8 @@ travis encrypt <PASSWORD> --add deploy.password
 For that, make sure you installed the Travis CLI (see `https://github.com/travis-ci/travis.rb#installation`).
 
 
-# TODO:
+## TODO:
 
-* add all OS to travis file: for the moment not supported! https://github.com/travis-ci/travis-ci/issues/9744#issuecomment-419426053
-
-* add online codecov? https://codecov.io/
 
 * Format HISTORY and add content to github releases (and pypi?) automatically via CLI and travis
 
@@ -548,3 +537,10 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 *  Github releases aren't including the wheel and sdist binaries
 
 * improve `create_docs.sh`: **it should succeed only if everything succeedes**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
+
+
+## MAYBE TODO:
+
+* add all OS to travis file: for the moment not supported! https://github.com/travis-ci/travis-ci/issues/9744#issuecomment-419426053
+
+* add online codecov https://codecov.io/
