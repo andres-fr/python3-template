@@ -61,7 +61,7 @@ jobs:
 
     # If building was successful, deploy to various platforms
     - stage: deploy
-      script: echo ""
+      script: echo ">>>>>>>>><" && ls dist # echo ""
       name: "Deploy to GitHub Releases and PyPI"
       deploy:
         - provider: releases

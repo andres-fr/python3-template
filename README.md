@@ -532,8 +532,6 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 
 * Format HISTORY and add content to github releases (and pypi?) automatically via CLI and travis
 
-* Travis says skipping because no tag... BUT there is tag! AND it is actually deploying!?
-
 *  Github releases aren't including the wheel and sdist binaries
 
 * improve `create_docs.sh`: **it should succeed only if everything succeedes**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
