@@ -1,5 +1,6 @@
-# Define all needed environmental variables: the rest of the yml will most
-# likely translate well to other similar projects
+# Define needed environmental variables: the rest of the yml will most
+# likely translate well to other similar projects, except for the
+# "secure" passwords in the deploy stage, which have to be adapted.
 env:
   global:
     # test stage config
@@ -14,8 +15,6 @@ env:
     - PYPI_USERNAME="fr_andres"
     - GH_RELEASES_ASSET_PATH="dist/*" # all matches for this path will be included into the GitHub release
     - REPO_NAME="andres-fr/python3-template" # releases will only work under this name
-    - GH_RELEASES_API_KEY_SECURE="mf8Clj5RXzIX05dXTDGWnxeembpncHslFlIaSEpJt83/odusp1u885rxvYjrSzpcsxE3iaWdDf9W3vlB9/Hm/b5TUc0WBg/kxCx5qs3v6K9N0+3JURMUEhtBfUYs6FJ4RRIcWoakxFjlSZM9FmvGo1yQlabKZlPLTvQn4xwWQzk9fLAyKEDFJnCCmN1HzZm8SNLSIhZrvyw9Cz12bZYixsyfFODEV/Nk4XE4CTcFqgWRzy1wLN5oYQB/+H9CvVnX9yeF9ijkmBLzktgtU0xe0zYZNeHcGiviIS8oWVIpnJ8BSh55oqBsTxJshdKXO7O4dymzya4aLM/cr2SIjUCNOfaBiF4pJ82IHvLN3N0KMXRfpZjktaytZHgVdGAgMxoqzlLZulREaAL0O89r5y7LnXj2QUtnluXwiXvFlCbnWL1Tu8721xjXqNdGj4c2BVwnRIy8fFImvdaTKumHeUpkviYaEReNMBU3Kc8lBzm5uEaZoo0eErWtOoDJ+YF0IFwY0dnGH+8V3nTasO0n+lhiWZ+p22ckO7MvONRfgrWZT+qkZF0jEwKQRfou9+Jcs2+cilTJs/LRW2/nO+tA9H3DMFaq6aXM2DkxJO0+mQmxAHjCmuBTeru4416rzdATZ6OIhsC2D5CIY/HrlC4fGJBbwlG751hCqeMY0QoxLwI0cSY="
-    - PYPI_PASSWORD_SECURE="qpDiwstuH9zjNAqeLUmn9s+AOny+eKYGBAWP3qrWwRi2gx+w0KQwk+uz+E/FgJp6lkPzAeV+UqMCz/y03EDK+dRdkbz7C5RrQFechHZM+Y1adPXfrIQvF3YdCzCRaLUF7V0/3gED6yGvFEquZLwxHSyM0GCUc8LyJnSuPDocFe7E2jiPJ+R8HFBD6dBqz4UFnriCiLKFj4//MJLdXu1Ad0SITW8XOrpHO/SrvWJ5PT2ilRcUPbpENqxSryG570CNUYyEE71jfxjOsPYAINZmiNnDCkYPaRXyCnPsNOgSwvqGLMr8cmUCjkhhfg/FGmztWQdON/cbdxGz38JcrynFeg1x2pCJ3Nwf4dIPrr3X5EFPfng0eJvVMLI8d6ne6dZvdRgSelevP09l4+6cF6gI12/OKxhn6WmGaADcWXnQQ6+a61n0rsObZadcGCR8ZsPw9QUJx1CHIYmBuaEAtMVgE4tDuXundBQa8mAbV4cgfDyXQ+Y0/zm52eVGAQVvwImWPvwEq5KnhsOoHgaR9nKtnFyENRnbFVX002QNmprahjPRi+yL2j/LIJg/7h2kmWolbuX0jkhpvgDmg5Sri2h7aqrYubM4Ko/GnjNnbZX36ePu453K97tHxl7KuFXX6TFzYwM2DRtD+/RY39gYqI49Mt9CYrUaJMUqZcPNn82ypQQ="
 
 # this line routes the builds to Ubuntu 16.04
 dist: xenial
@@ -87,9 +86,9 @@ jobs:
         - provider: releases
           skip_cleanup: true
           name: "Test name for release"
-          body: "Test body for release, **this**, *that*.\\nNewline?\nnewline?"
+          body: "Test body for release, **this**, *that*.\\nNewline?\nnewline? * a * b * c [link](www.google.com)"
           api_key:
-            secure: "$GH_RELEASES_API_KEY_SECURE"
+            secure: "mf8Clj5RXzIX05dXTDGWnxeembpncHslFlIaSEpJt83/odusp1u885rxvYjrSzpcsxE3iaWdDf9W3vlB9/Hm/b5TUc0WBg/kxCx5qs3v6K9N0+3JURMUEhtBfUYs6FJ4RRIcWoakxFjlSZM9FmvGo1yQlabKZlPLTvQn4xwWQzk9fLAyKEDFJnCCmN1HzZm8SNLSIhZrvyw9Cz12bZYixsyfFODEV/Nk4XE4CTcFqgWRzy1wLN5oYQB/+H9CvVnX9yeF9ijkmBLzktgtU0xe0zYZNeHcGiviIS8oWVIpnJ8BSh55oqBsTxJshdKXO7O4dymzya4aLM/cr2SIjUCNOfaBiF4pJ82IHvLN3N0KMXRfpZjktaytZHgVdGAgMxoqzlLZulREaAL0O89r5y7LnXj2QUtnluXwiXvFlCbnWL1Tu8721xjXqNdGj4c2BVwnRIy8fFImvdaTKumHeUpkviYaEReNMBU3Kc8lBzm5uEaZoo0eErWtOoDJ+YF0IFwY0dnGH+8V3nTasO0n+lhiWZ+p22ckO7MvONRfgrWZT+qkZF0jEwKQRfou9+Jcs2+cilTJs/LRW2/nO+tA9H3DMFaq6aXM2DkxJO0+mQmxAHjCmuBTeru4416rzdATZ6OIhsC2D5CIY/HrlC4fGJBbwlG751hCqeMY0QoxLwI0cSY="
           file_glob: true
           file: "$GH_RELEASES_ASSET_PATH"
           on:
@@ -100,7 +99,7 @@ jobs:
           skip_cleanup: true
           user: "$PYPI_USERNAME"
           password:
-            secure: "$PYPI_PASSWORD_SECURE"
+            secure: "qpDiwstuH9zjNAqeLUmn9s+AOny+eKYGBAWP3qrWwRi2gx+w0KQwk+uz+E/FgJp6lkPzAeV+UqMCz/y03EDK+dRdkbz7C5RrQFechHZM+Y1adPXfrIQvF3YdCzCRaLUF7V0/3gED6yGvFEquZLwxHSyM0GCUc8LyJnSuPDocFe7E2jiPJ+R8HFBD6dBqz4UFnriCiLKFj4//MJLdXu1Ad0SITW8XOrpHO/SrvWJ5PT2ilRcUPbpENqxSryG570CNUYyEE71jfxjOsPYAINZmiNnDCkYPaRXyCnPsNOgSwvqGLMr8cmUCjkhhfg/FGmztWQdON/cbdxGz38JcrynFeg1x2pCJ3Nwf4dIPrr3X5EFPfng0eJvVMLI8d6ne6dZvdRgSelevP09l4+6cF6gI12/OKxhn6WmGaADcWXnQQ6+a61n0rsObZadcGCR8ZsPw9QUJx1CHIYmBuaEAtMVgE4tDuXundBQa8mAbV4cgfDyXQ+Y0/zm52eVGAQVvwImWPvwEq5KnhsOoHgaR9nKtnFyENRnbFVX002QNmprahjPRi+yL2j/LIJg/7h2kmWolbuX0jkhpvgDmg5Sri2h7aqrYubM4Ko/GnjNnbZX36ePu453K97tHxl7KuFXX6TFzYwM2DRtD+/RY39gYqI49Mt9CYrUaJMUqZcPNn82ypQQ="
           on:
             tags: true
             # branch: master # already filtered out in the "branches" section

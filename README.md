@@ -546,3 +546,6 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 * add all OS to travis file: for the moment not supported! https://github.com/travis-ci/travis-ci/issues/9744#issuecomment-419426053
 
 * add online codecov https://codecov.io/
+
+
+TRAVIS_COMMIT_MESSAGE
