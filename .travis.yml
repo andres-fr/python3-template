@@ -15,7 +15,7 @@ env:
     - PYPI_USERNAME="fr_andres"
     - GH_RELEASES_ASSET_PATH="dist/*" # all matches for this path will be included into the GitHub release
     - REPO_NAME="andres-fr/python3-template" # releases will only work under this name
-    - TEST=`cat ci_scripts/sphinx_doc_config.txt`
+    - TEST=`cat ci_scripts/test.md`
 
 # this line routes the builds to Ubuntu 16.04
 dist: xenial
@@ -87,23 +87,7 @@ jobs:
         - provider: releases
           skip_cleanup: true
           name: "Test name for release, commit: ${TRAVIS_COMMIT_MESSAGE}"
-          body: "Test body for release, **this**, *that*.
-
-
-          Newline?
-
-          * List element 1
-          * List elt 2
-            1. Numbered list with [link](https://www.google.com)
-            2. And \`literals\`
-          ### Note:
-
-          The sum of two ones equals the sum of one two.
-
-
-
-          ${TEST}
-"
+          body: "${TEST}"
           api_key:
             secure: "mf8Clj5RXzIX05dXTDGWnxeembpncHslFlIaSEpJt83/odusp1u885rxvYjrSzpcsxE3iaWdDf9W3vlB9/Hm/b5TUc0WBg/kxCx5qs3v6K9N0+3JURMUEhtBfUYs6FJ4RRIcWoakxFjlSZM9FmvGo1yQlabKZlPLTvQn4xwWQzk9fLAyKEDFJnCCmN1HzZm8SNLSIhZrvyw9Cz12bZYixsyfFODEV/Nk4XE4CTcFqgWRzy1wLN5oYQB/+H9CvVnX9yeF9ijkmBLzktgtU0xe0zYZNeHcGiviIS8oWVIpnJ8BSh55oqBsTxJshdKXO7O4dymzya4aLM/cr2SIjUCNOfaBiF4pJ82IHvLN3N0KMXRfpZjktaytZHgVdGAgMxoqzlLZulREaAL0O89r5y7LnXj2QUtnluXwiXvFlCbnWL1Tu8721xjXqNdGj4c2BVwnRIy8fFImvdaTKumHeUpkviYaEReNMBU3Kc8lBzm5uEaZoo0eErWtOoDJ+YF0IFwY0dnGH+8V3nTasO0n+lhiWZ+p22ckO7MvONRfgrWZT+qkZF0jEwKQRfou9+Jcs2+cilTJs/LRW2/nO+tA9H3DMFaq6aXM2DkxJO0+mQmxAHjCmuBTeru4416rzdATZ6OIhsC2D5CIY/HrlC4fGJBbwlG751hCqeMY0QoxLwI0cSY="
           file_glob: true
