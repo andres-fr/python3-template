@@ -542,8 +542,6 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 ## TODO:
 
 
-
-
 * Find a clean way to store a changelog in the repo, and
   1. Force user to update it upon every bumpversion
   2. Make travis grab changes and add them to the release automatically
@@ -551,7 +549,7 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 
 * improve `create_docs.sh`: **it should succeed only if everything succeeds**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
 
-
+* add infrastructure for GitHub pages with Travis
 
 ## MAYBE TODO:
 
