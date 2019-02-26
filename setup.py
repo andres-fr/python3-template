@@ -20,7 +20,7 @@ def setup():
     setuptools.setup(
         name="dummypackage-dummyname",
         # the version is automatically handled by "bumpversion"
-        version="1.1.1",
+        version="1.1.2",
         author="Dummy Name",
         author_email="dd@dummysolutions.com",
         description="A dummy package",
