@@ -8,6 +8,7 @@ r"""
   <http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html>`_,
   like:
 
+* 1 2 3 4
 * *Italics*
 * **Bold**
 * Numbered and nested lists:

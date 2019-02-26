@@ -375,16 +375,19 @@ Once we reach a given milestone, we can label that specific commit with a versio
 There are different ways of handling the tag system, the `git` CLI and `gitpython` being very popular among them. Since we want here very specific functionality, we use the `bump2version` third-party library: It allows to automatically increment and set the version tag following semantic versioning (see `https://semver.org/`), which is highly encouraged. It works as follows:
 
 * The `.bumpversion.cfg` file holds the current version and the configuration.
-* Calling `bump2version <ADVANCE>` will automatically update the version in the `.bumpversion.cfg` and `setup.py` files, and add the corresponding tag to the git repo. The `<ADVANCE>` parameter can be either **major**, **minor**, or **patch**.
+* Calling `bump2version <ADVANCE>` will automatically update the version in the `.bumpversion.cfg` and other specified files, and add the corresponding tag to the git repo. The `<ADVANCE>` parameter can be either **major**, **minor**, or **patch**.
 
 So we just need to start our repo by setting the desired version in the `.bumpversion.cfg` file (usually `0.1.0`), and then commit normally. The process of adding a tag will be something like:
 
 ```
-# after finished making all changes and saving all files (to avoid 'Git working directory is not clean' error):
+# Make sure you saved all files to avoid 'Git working directory is not clean' error
+# Also make sure that all specified files in the cfg file exist (e.g. docs/conf.py):
 git add . # or whatever you want to add
 git commit -m "finished implementing the last feature we needed"
 bump2version major
 ```
+
+**NOTE** that the syntax of this file doesn't allow conditionals, so all specified files must exist at the moment of execution.
 
 After `bump2version`, doing a `git push` will send the commit to the server as usual, and the tag will automatically appear under the GitHub *Releases* tab, holding a snapshot of the current repo's state as `.zip` and `.tar.gz`.
 
@@ -493,13 +496,6 @@ By default, Travis starts a new virtual machine **from scratch for every single 
 
 
 
-### Run Travis locally:
-
-For some small experimental changes or debugging of `.travis.yml`, it is impractical to actually commit and trigger a build online: it takes time, and exposes changes that may be irrelevant. The Travis client (`https://github.com/travis-ci/travis.rb#command-line-client`) provides functionality to interact with Travis locally.
-
-1. Installation: `https://github.com/travis-ci/travis.rb#installation`
-
-
 
 ### Steps:
 
@@ -546,17 +542,13 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 ## TODO:
 
 
-* gh release text format: https://github.com/travis-ci/dpl/issues/155
+* Nice markup format in GH release body text: ATM not possible https://github.com/travis-ci/dpl/issues/155
 
 * gh release changelog MD/RST files, find a clean way
 
-* RTD: v.1.0.15 is showing 1.0.6 (this happens to be the version under docs).
-
 * improve `create_docs.sh`: **it should succeed only if everything succeeds**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
 
-* finish run travis locally part?
 
-* Update this readme
 
 ## MAYBE TODO:
 

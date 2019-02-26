@@ -12,6 +12,3 @@ Newline?
 
 The sum of two ones equals the sum of one two.
 
-
-
-          
