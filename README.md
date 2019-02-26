@@ -353,6 +353,8 @@ It will then generate the files into `docs/_build` (they are also being uploaded
 
 Optionally, you can deploy your docs into https://readthedocs.org/ by synchronizing it with your github account. Importing the repository should be straightforward: the page will automatically find your `conf.py` and generate the docs. The docs homepage of the project should provide a badge like the one at the top of this README and a link to the online docs. Note that the advertisment can be removed in the "Admin" tab.
 
+By default, it will provide two versions of the doc: `latest` and `stable`. As explained [here](https://docs.readthedocs.io/en/stable/versions.html), for some reason they decided that the **latest release** is deployed on `stable`, and `latest` holds conversely the `stable` release. Pretty confusing. If you want RTD to reflect the current repository's state, it is recommended to disable `latest` in settings and provide only a `stable` version.
+
 This repo's docs are being deployed to https://python3-template.readthedocs.io
 
 
@@ -548,4 +550,4 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 * add online codecov https://codecov.io/
 
 
-TRAVIS_COMMIT_MESSAGE
+
