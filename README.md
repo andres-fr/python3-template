@@ -542,9 +542,12 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 ## TODO:
 
 
-* Nice markup format in GH release body text: ATM not possible https://github.com/travis-ci/dpl/issues/155
 
-* gh release changelog MD/RST files, find a clean way
+
+* Find a clean way to store a changelog in the repo, and
+  1. Force user to update it upon every bumpversion
+  2. Make travis grab changes and add them to the release automatically
+  3. As OS-agnostic and automated as possible
 
 * improve `create_docs.sh`: **it should succeed only if everything succeeds**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
 
@@ -552,7 +555,9 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 
 ## MAYBE TODO:
 
-* add all OS to travis file: for the moment not supported! https://github.com/travis-ci/travis-ci/issues/9744#issuecomment-419426053
+* add all OS to travis file: ATM not possible  https://github.com/travis-ci/travis-ci/issues/9744#issuecomment-419426053
+
+* Nice markup format in GH release body text: ATM not possible https://github.com/travis-ci/dpl/issues/155
 
 * add online codecov https://codecov.io/
 
