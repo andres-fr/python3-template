@@ -1,7 +1,7 @@
 # python3-template   [![Build Status](https://travis-ci.org/andres-fr/python3-template.svg?branch=master)](https://travis-ci.org/andres-fr/python3-template) [![PyPI version](https://badge.fury.io/py/dummypackage-dummyname.svg)](https://badge.fury.io/py/dummypackage-dummyname) [![Documentation Status](https://readthedocs.org/projects/python3-template/badge/?version=latest)](https://python3-template.readthedocs.io/en/latest/?badge=latest)
 
 
-Dummy Python3 project providing structure for development, unit testing, runtime/memory benchmarking, PEP8 check, [autodocumentation](https://python3-template.readthedocs.io), and deployment to [PyPI](https://pypi.org/project/dummypackage-dummyname) and [GitHub Releases](https://github.com/andres-fr/python3-template/releases), automated via [Travis CI](https://travis-ci.org/andres-fr/python3-template).
+Dummy Python3 project providing structure for development, unit testing, runtime/memory benchmarking, PEP8 check, [autodocumentation](https://python3-template.readthedocs.io), and deployment to [PyPI](https://pypi.org/project/dummypackage-dummyname) and [GitHub Releases](https://github.com/andres-fr/python3-template/releases), automated via [Travis CI](https://travis-ci.org/andres-fr/python3-template) (online and locally).
 
 
 * The actual code is to be developed in the `dummypackage` library, and used in an application like `dummyapp.py`, which can be run with `python dummyapp.py`. **To ensure proper function of the tools, all subdirectories must include an `__init.py__` file**.
@@ -492,6 +492,15 @@ Each job can be mapped to a "script", which is a call to a program. If the scrip
 By default, Travis starts a new virtual machine **from scratch for every single job**. All the required dependencies have to be installed prior to running the jobs. This can take a while, so it is helpful to design the CI pipeline in a way that minimizes overhead. Some of the dependencies can be shared across jobs using the `cache` keyword. Additionaly, the file cleanup that happens prior to some tasks can be also skipped.
 
 
+
+### Run Travis locally:
+
+For some small experimental changes or debugging of `.travis.yml`, it is impractical to actually commit and trigger a build online: it takes time, and exposes changes that may be irrelevant. The Travis client (`https://github.com/travis-ci/travis.rb#command-line-client`) provides functionality to interact with Travis locally.
+
+1. Installation: `https://github.com/travis-ci/travis.rb#installation`
+
+
+
 ### Steps:
 
 1. sync your GitHub account with Travis, and allow access etc to your repositories. Finally, "activate" the desired repo in Travis. You should see the typical `[build | failing]` badge. Click on it and copy the markdown link into the main `README` of the repo, as shown on the top of this file.
@@ -532,13 +541,20 @@ travis encrypt <PASSWORD> --add deploy.password
 For that, make sure you installed the Travis CLI (see `https://github.com/travis-ci/travis.rb#installation`).
 
 
+
+
 ## TODO:
 
-* Releases: use a tool like release-it or semantic-release? bumpversion problem: it requires a previous commit, and then commits only 2 small changes. The message provided affects the "tag commit message" only, find a way to edit the proper release title and message. Maybe HISTORY.rst?
+
+* gh release text format: https://github.com/travis-ci/dpl/issues/155
+
+* gh release changelog MD/RST files, find a clean way
+
+* RTD: v.1.0.15 is showing 1.0.6 (this happens to be the version under docs).
 
 * improve `create_docs.sh`: **it should succeed only if everything succeeds**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
 
-* https://github.com/travis-ci/dpl/issues/155
+* finish run travis locally part?
 
 * Update this readme
 
