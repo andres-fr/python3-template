@@ -10,14 +10,14 @@ Dummy Python3 project providing structure for development, unit testing, runtime
 
 * Reports for runtime and memory benchmarks can be generated into `timebenchmark` and `memorybenchmark` respectively.
 
-* Autodocs are also generated into `docs` in PDF as well as HTML (which can be deployed [online](https://python3-template.readthedocs.io)).
+* Autodocs are also generated using `sphinx` into the `docs` directory, in PDF as well as HTML (which can be deployed [online](https://python3-template.readthedocs.io)).
 
-* A `setup.py` script to create an OS-agnostic package into `dist` is provided, as well as functionality to deploy it into git releases and PyPI.
+* A `setup.py` script to create an OS-agnostic package into `dist` is provided, as well as functionality to keeping track of versioning and deploying into git releases and PyPI.
 
-* All these tasks can be performed manually as explained later on, and also are automated via Travis CI as it can be seen in the `.travis.yml` file, and the `ci_scripts` directory.
+* All these tasks can be performed manually as explained later on, and also are automated via Travis CI as it can be seen in the `.travis.yml` file, and the `ci_scripts` directory, for maximal efficiency and efficacy.
 
 
-This readme has been developed for Ubuntu-like systems, but the Python examples should transfer well to other systems. Also note that this has been tested for Python 3 only, make sure that your `python` command invokes a Python 3 binary (or that you adapt the exmples presented here).
+This readme has been developed for Ubuntu-like systems, but with the intention of it being as much OS-agnostic as possible (all Python examples should transfer well to other systems). Also note that this has been tested for Python 3 only, make sure that your `python` command invokes a Python 3 binary (or that you adapt the exmples presented here).
 
 
 # Dependencies:
@@ -538,15 +538,9 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 
 ## TODO:
 
-
-* Find a clean way to store a changelog in the repo, and
-  1. Force user to update it upon every bumpversion
-  2. Make travis grab changes and add them to the release automatically
-  3. As OS-agnostic and automated as possible
-
 * improve `create_docs.sh`: **it should succeed only if everything succeeds**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
 
-* add infrastructure for GitHub pages with Travis
+* add infrastructure for GitHub pages with Travis https://kbroman.org/simple_site/pages/independent_site.html
 
 ## MAYBE TODO:
 
