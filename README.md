@@ -365,7 +365,7 @@ By default, it will provide two versions of the doc: `latest` and `stable`. See 
 
 
 
-# Build and Deploy:
+# Versioning, Build and Deploy:
 
 
 ### Tagging:
@@ -379,23 +379,20 @@ There are different ways of handling the tag system, the `git` CLI and `gitpytho
 
 So we just need to start our repo by setting the desired version in the `.bumpversion.cfg` file (usually `0.1.0`), and then commit normally. The process of adding a tag will be something like:
 
-```
-# Make sure you saved all files to avoid 'Git working directory is not clean' error
-# Also make sure that all specified files in the cfg file exist (e.g. docs/conf.py):
-git add . # or whatever you want to add
-git commit -m "finished implementing the last feature we needed"
-bump2version major
-```
-
-**NOTE** that the syntax of this file doesn't allow conditionals, so all specified files must exist at the moment of execution.
-
-After `bump2version`, doing a `git push` will send the commit to the server as usual, and the tag will automatically appear under the GitHub *Releases* tab, holding a snapshot of the current repo's state as `.zip` and `.tar.gz`.
+1. Once a milestone is reached, **UPDATE THE `CHANGELOG.md` FILE** with the changes since last version. To maintain an optimal changelog, see `https://keepachangelog.com`. 
+  * Ideally, you have kept an `Unreleased` section at the top that you can easily name into the upcoming release.  Added for new features.
+  * The main tokens to list are `added, changed, deprecated, removed, fixed, and security`.
+  * State clearly and extensively the deprecations and things that will break backward compatibility.
+  * Follow semantic versioning for each tag, and add a date to it.
+2. Make sure you saved all files and commited to avoid `Git working directory is not clean` error. Also make sure that all specified files in the `.bumpversion.cfg` file exist (e.g. `docs/conf.py`)
+3. Call `bump2version <LABEL>` with the corresponding increment label: `major, minor or patch`.
+4. `git push` to see the changes! Depending on your branch, this will trigger a Travis build/deploy.
 
 
-Apparently, the format of `.bumpversion.cfg` is not standard and the tool doesn't provide a direct means to read the current version. Therefore, the following solutions are provided:
+Apparently, bumpversion doesn't provide a direct means to read the current version. Therefore, the following solutions are provided:
 
-1. From CLI: ``` version=`grep "current_version" .bumpversion.cfg | cut -d'=' -f2 | xargs` ```
-2. Within Python: See `ci_scripts/get_version.py`
+* From CLI: version=`grep "current_version" .bumpversion.cfg | cut -d'=' -f2 | xargs`
+* Within Python: See ci_scripts/get_version.py
 
 
 ### Build and Local Install:
@@ -553,9 +550,11 @@ For that, make sure you installed the Travis CLI (see `https://github.com/travis
 
 ## MAYBE TODO:
 
+* Automatic changelog creation from issues, PRs, tags: https://github.com/github-changelog-generator/github-changelog-generator
+
 * add all OS to travis file: ATM not possible  https://github.com/travis-ci/travis-ci/issues/9744#issuecomment-419426053
 
-* Nice markup format in GH release body text: ATM not possible https://github.com/travis-ci/dpl/issues/155
+* Complete support for markup in GH release body text from Travis: ATM not possible https://github.com/travis-ci/dpl/issues/155
 
 * add online codecov https://codecov.io/
 
