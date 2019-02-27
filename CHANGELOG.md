@@ -24,3 +24,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.7] - 2015-10-06
 ### Changed
 - `f(x)` has been integrated into `F(x)`
+
+
+
+
+
+
+
+## TODO:
+
+* improve `create_docs.sh`: **it should succeed only if everything succeeds**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
+
+* expand branching model: https://nvie.com/posts/a-successful-git-branching-model/
+
+* add infrastructure for GitHub pages with Travis https://kbroman.org/simple_site/pages/independent_site.html
+
+
+
+## MAYBE TODO:
+
+* Automatic changelog creation from issues, PRs, tags: https://github.com/github-changelog-generator/github-changelog-generator
+
+* add all OS to travis file: ATM not possible  https://github.com/travis-ci/travis-ci/issues/9744#issuecomment-419426053
+
+* Complete support for markup in GH release body text from Travis: ATM not possible https://github.com/travis-ci/dpl/issues/155
+
+* add online codecov https://codecov.io/
+
+
+

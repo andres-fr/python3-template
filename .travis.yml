@@ -64,7 +64,7 @@ jobs:
       script: python -m flake8
     - script: python -m unittest utest/tautology.py
       name: "Tautological Test"
-    - script: python ci_scripts/utest_with_coverage.py -p "$CODECOV_REQUIRED_PERCENT"
+    - script: python ci_scripts/utest_with_coverage.py -n "$DOC_PACKAGE_NAME" -p "$CODECOV_REQUIRED_PERCENT"
       name: "Unit Testing and Code Coverage"
     - script: python ci_scripts/memory_benchmark.py -m "$MAX_MB_ALLOWED" -i "$MEM_MEASURE_EVERY_SEC"
       name: "Memory Benchmarking"

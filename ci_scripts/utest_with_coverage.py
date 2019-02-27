@@ -7,6 +7,7 @@ dummypackage module. If all tests pass, and coverage PERCENTAGE is above
 the number given as parameter, the script exits with 0, otherwise 1.
 """
 
+import os
 import sys
 import coverage
 import argparse
@@ -16,6 +17,11 @@ import utest
 
 
 if __name__ == "__main__":
+    # We have to cd into this module's directory because coverage.Coverage
+    # won't find the module data otherwise
+    relative_path = os.path.dirname(__file__)
+    if relative_path:
+        os.chdir(relative_path)
     #
     print("\n\n")
     print("==================================================================")
@@ -23,19 +29,24 @@ if __name__ == "__main__":
     print("==================================================================")
     #
     parser = argparse.ArgumentParser()
+    parser.add_argument("-n", "--package_name",
+                        type=str, required=True,
+                        help="A string matching the name of the directory \
+                        containing the code to be covered.")
     parser.add_argument("-p", "--min_coverage_percent",
                         type=float, default=100.0,  # perfect cov. default
                         help="A float between 0.0 and 100.0 expressing the \
                         minimal code coverage required to succeed")
     args = parser.parse_args()
     #
+    PACKAGE_NAME = args.package_name
     COV_PERCENT = args.min_coverage_percent
     assert 0.0 <= COV_PERCENT <= 100.0,\
         "argument -p has to be between 0 and 100 and was " + str(COV_PERCENT)
 
     # wrap the testing with the coverage analyzer:
     c = coverage.Coverage(data_file="dummy_value", data_suffix=True,
-                          branch=True, source=["dummypackage"])
+                          branch=True, source=[PACKAGE_NAME])
 
     # perform unit tests, wraped with the coverage instance
     c.start()
@@ -60,6 +71,7 @@ if __name__ == "__main__":
     print("\n\n")
     #
     if num_errors > 0 or num_failures > 0 or cov_percentage < COV_PERCENT:
+        print("exiting with error!")
         sys.exit(1)
     else:
         # exit(0) means all went well

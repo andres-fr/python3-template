@@ -1,4 +1,4 @@
-# python3-template   [![Build Status](https://travis-ci.org/andres-fr/python3-template.svg?branch=master)](https://travis-ci.org/andres-fr/python3-template) [![PyPI version](https://badge.fury.io/py/dummypackage-dummyname.svg)](https://badge.fury.io/py/dummypackage-dummyname) [![Documentation Status](https://readthedocs.org/projects/python3-template/badge/?version=latest)](https://python3-template.readthedocs.io/en/latest/?badge=latest)
+# python3-template   [![Build Status](https://travis-ci.org/andres-fr/python3-template.svg?branch=master)](https://travis-ci.org/andres-fr/python3-template)
 
 
 Dummy Python3 project providing structure for development, unit testing, runtime/memory benchmarking, PEP8 check, [autodocumentation](https://python3-template.readthedocs.io), and deployment to [PyPI](https://pypi.org/project/dummypackage-dummyname) and [GitHub Releases](https://github.com/andres-fr/python3-template/releases), automated via [Travis CI](https://travis-ci.org/andres-fr/python3-template) (online and locally).
@@ -532,25 +532,3 @@ travis encrypt <PASSWORD> --add deploy.password
 ```
 
 For that, make sure you installed the Travis CLI (see `https://github.com/travis-ci/travis.rb#installation`).
-
-
-
-
-## TODO:
-
-* improve `create_docs.sh`: **it should succeed only if everything succeeds**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
-
-* add infrastructure for GitHub pages with Travis https://kbroman.org/simple_site/pages/independent_site.html
-
-## MAYBE TODO:
-
-* Automatic changelog creation from issues, PRs, tags: https://github.com/github-changelog-generator/github-changelog-generator
-
-* add all OS to travis file: ATM not possible  https://github.com/travis-ci/travis-ci/issues/9744#issuecomment-419426053
-
-* Complete support for markup in GH release body text from Travis: ATM not possible https://github.com/travis-ci/dpl/issues/155
-
-* add online codecov https://codecov.io/
-
-
-
