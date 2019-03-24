@@ -73,11 +73,11 @@ if __name__ == "__main__":
     os.mkdir(OUT_DIR)
 
     # call sphinx-quickstart with the given arguments
-    quickstart_argv=["-q", "-p", PACKAGE_NAME, "-a", AUTHOR,
-                     # "--makefile", "--batchfile",
-                     "--ext-autodoc", "--ext-imgmath", "--ext-viewcode",
-                     "--ext-githubpages", "-d", "version="+VERSION,
-                     "-d", "release="+VERSION, OUT_DIR]
+    quickstart_argv = ["-q", "-p", PACKAGE_NAME, "-a", AUTHOR,
+                       # "--makefile", "--batchfile",
+                       "--ext-autodoc", "--ext-imgmath", "--ext-viewcode",
+                       "--ext-githubpages", "-d", "version="+VERSION,
+                       "-d", "release="+VERSION, OUT_DIR]
     sphinx_quickstart.main(argv=quickstart_argv)
 
     # Since some parameters are sadly hardcoded, it follows some dirty editing:
