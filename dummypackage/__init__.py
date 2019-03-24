@@ -21,13 +21,16 @@ r"""
   therefore have to be wrapped. This can be achieved with ``|`` blocks.
 | This is a new line.
 
+
 #######################
 Section about sections:
 #######################
 
 * Surrounding chars have to be at least as long as the title
-* No explicit hierarchy, but this recommended: ``#, *, =, -, ^, "`` (the first
- two with overline).
+
+
+No explicit hierarchy, but this recommended: ``#, *, =, -, ^, "``
+(the first two with overline).
 
 
 Subsection:
@@ -70,6 +73,7 @@ Sphinx formatting:
    :type a: int or float
    :type b: int, float or None
    :rtype: integer or float
+
    .. note:: Neither ``a`` nor ``b`` can be infinity!
 
 
@@ -155,7 +159,6 @@ True   False  True
 False  True   True
 True   True   True
 =====  =====  ======
-
 """
 
 

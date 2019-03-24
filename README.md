@@ -335,20 +335,20 @@ print(usage)
 
 Using it is pretty straightforward: simply call `flake8` or `python -m flake8` in the repository root directory. If any errors are present, the command will print them and return with error status.
 
-Note that some "errors" are actually proper design decissions. These can be bypassed with the `noqa` directive, like this: `import environment  # noqa: F401`.
+Note that some "errors" are actually design decissions. These can be bypassed with the `noqa` directive, like this: `import environment  # noqa: F401`. The `noqa` directives themselves can be ignored by running `flake8 --disable-noqa`.
 
 
 
 
 # Autodoc:
 
-This project uses `sphinx` and `LaTeX` to automatically generate the docs. The `ci_scripts/maje_sphinx_docs.sh` script provides a most automated and flexible doc generation as HTML and PDF. It only requires the user to provide `projectname` and `author`. At the moment, it doesn't assert for input or environment errors and has to be called from the repo root as follows:
+This project provides a script that generates the package's autodocs as HTML and PDF from scratch, using `sphinx` (and `LaTeX` for the PDF). Usage example:
 
 ```
-./ci_scripts/make_sphinx_docs.sh dummypackage "Dummy Dumson"
+python ci_scripts/make_sphinx_docs.py -n dummypackage -a "Dummy Dumson" -f .bumpversion.cfg -o docs -l
 ```
 
-It will then generate the files into `docs/_build` (they are also being uploaded to the repository as they aren't filtered by `.gitignore`).
+The docs will be generated into `docs/_build` (they are also being uploaded to the repository as they aren't filtered by `.gitignore`).
 
 
 Optionally, you can deploy your docs into https://readthedocs.org/ by synchronizing it with your github account. Importing the repository should be straightforward: the page will automatically find your `conf.py` and generate the docs. The docs homepage of the project should provide a badge like the one at the top of this README and a link to the online docs. Note that the advertisment can be removed in the "Admin" tab. This repo's docs are being deployed to https://python3-template.readthedocs.io
@@ -356,11 +356,35 @@ Optionally, you can deploy your docs into https://readthedocs.org/ by synchroniz
 By default, it will provide two versions of the doc: `latest` and `stable`. See this link about versioning in readthedocs: [here](https://docs.readthedocs.io/en/stable/versions.html).
 
 
+### From CLI:
+
+The Python script provided follows closely what a CLI user would do with the following bash script:
 
 
+```
+# usage example: ./make_sphinx_docs "compuglobalhypermeganet" "Homer Simpson"
+# FOR THE MOMENT ONLY CALLABLE FROM REPO ROOT
 
+PACKAGE_NAME=$1
+AUTHOR=$2
+VERSION=`grep "current_version" .bumpversion.cfg | cut -d'=' -f2 | xargs`
+CONF_PY_PATH="docs/conf.py"
+rm -rf docs/*
 
+sphinx-quickstart -q -p "$PACKAGE_NAME" -a "$AUTHOR" --makefile --batchfile --ext-autodoc --ext-imgmath --ext-viewcode --ext-githubpages  -d version="$VERSION" -d release="$VERSION" docs/
 
+# sadly the following is needed to change the html_theme flag
+sed -i '/html_theme/d' "$CONF_PY_PATH" # remove the html_theme line
+sed -i '1r ci_scripts/sphinx_doc_config.txt' "$CONF_PY_PATH" # add the desired config after line 1
+echo -e "\nlatex_elements = {'extraclassoptions': 'openany,oneside'}" >> "$CONF_PY_PATH" # override latex config at end of file to minimize blank pages
+
+# even more sadly, this is the cleanest way I found to allow apidoc edit
+# index.rst without altering conf.py:
+rm docs/index.rst
+sphinx-apidoc -F "$PACKAGE_NAME" -o docs/
+
+make -C docs clean && make -C docs latexpdf && make -C docs html
+```
 
 
 
@@ -389,10 +413,10 @@ So we just need to start our repo by setting the desired version in the `.bumpve
 4. `git push` to see the changes! Depending on your branch, this will trigger a Travis build/deploy.
 
 
-Apparently, bumpversion doesn't provide a direct means to read the current version. Therefore, the following solutions are provided:
-
-* From CLI: version=`grep "current_version" .bumpversion.cfg | cut -d'=' -f2 | xargs`
-* Within Python: See ci_scripts/get_version.py
+Note that the `ci_scripts/bumpversion_ci.py` script provides some functionality to interact with bumpversion within Python (like e.g. getting the current version). As a quickfix from CLI, the following would work:
+```
+version=`grep "current_version" .bumpversion.cfg | cut -d'=' -f2 | xargs`
+```
 
 
 ### Build and Local Install:
