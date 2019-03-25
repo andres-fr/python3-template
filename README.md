@@ -358,12 +358,12 @@ By default, it will provide two versions of the doc: `latest` and `stable`. See 
 
 ### From CLI:
 
-The Python script provided follows closely what a CLI user would do with the following bash script:
+The Python script provided follows closely what a CLI user would do with something like the following bash script:
 
 
 ```
 # usage example: ./make_sphinx_docs "compuglobalhypermeganet" "Homer Simpson"
-# FOR THE MOMENT ONLY CALLABLE FROM REPO ROOT
+# ONLY CALLABLE FROM REPO ROOT
 
 PACKAGE_NAME=$1
 AUTHOR=$2
@@ -373,13 +373,12 @@ rm -rf docs/*
 
 sphinx-quickstart -q -p "$PACKAGE_NAME" -a "$AUTHOR" --makefile --batchfile --ext-autodoc --ext-imgmath --ext-viewcode --ext-githubpages  -d version="$VERSION" -d release="$VERSION" docs/
 
-# sadly the following is needed to change the html_theme flag
+# the following is needed to change the html_theme flag?
 sed -i '/html_theme/d' "$CONF_PY_PATH" # remove the html_theme line
 sed -i '1r ci_scripts/sphinx_doc_config.txt' "$CONF_PY_PATH" # add the desired config after line 1
 echo -e "\nlatex_elements = {'extraclassoptions': 'openany,oneside'}" >> "$CONF_PY_PATH" # override latex config at end of file to minimize blank pages
 
-# even more sadly, this is the cleanest way I found to allow apidoc edit
-# index.rst without altering conf.py:
+# cleanest way to allow apidoc edit index.rst without altering conf.py?
 rm docs/index.rst
 sphinx-apidoc -F "$PACKAGE_NAME" -o docs/
 
@@ -413,7 +412,7 @@ So we just need to start our repo by setting the desired version in the `.bumpve
 4. `git push` to see the changes! Depending on your branch, this will trigger a Travis build/deploy.
 
 
-Note that the `ci_scripts/bumpversion_ci.py` script provides some functionality to interact with bumpversion within Python (like e.g. getting the current version). As a quickfix from CLI, the following would work:
+Note that the `ci_scripts/bumpversion_utils.py` script provides some functionality to interact with bumpversion within Python (like e.g. getting the current version). As a quickfix from CLI, the following would work:
 ```
 version=`grep "current_version" .bumpversion.cfg | cut -d'=' -f2 | xargs`
 ```
@@ -446,11 +445,7 @@ We saw that tags get automatically tracked by GitHub. But for each release, we w
 1. Specify a changelog
 2. Pip-installable package in [wheel](https://pythonwheels.com/) format.
 
-This can be performed manually via browser in the GitHub webpage, and also via CLI as follows:
-
-```
-TODO
-```
+This can be performed manually via browser in the GitHub webpage, and also via CLI as explained in the [GitHub API](https://developer.github.com/v3/repos/releases/).
 
 Note that in principle it is not necessary to deploy manually if you have automated the deployment via Travis.
 
@@ -556,3 +551,20 @@ travis encrypt <PASSWORD> --add deploy.password
 ```
 
 For that, make sure you installed the Travis CLI (see `https://github.com/travis-ci/travis.rb#installation`).
+
+
+#### Branching:
+
+Travis builds get triggered on `master` and tagged builds only. Regular work can be done on a `dev` branch:
+
+```
+# create branch right after a commit:
+git checkout -b dev
+# work normally on it...
+...
+# track the new branch if you want to implicitly push to it:
+git push -u origin dev # the first time, then `git push`
+
+# once a milestone is reached, merge into master:
+xx
+```

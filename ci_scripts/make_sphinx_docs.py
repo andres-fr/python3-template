@@ -19,7 +19,7 @@ import sphinx.cmd.quickstart as sphinx_quickstart
 import sphinx.ext.apidoc as sphinx_apidoc
 import sphinx.cmd.make_mode as sphinx_build
 #
-from bumpversion_ci import get_bumpversion
+from bumpversion_utils import get_bumpversion
 
 
 REMOVE_LINE = """html_theme = 'alabaster'\n"""

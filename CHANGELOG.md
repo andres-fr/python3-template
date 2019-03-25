@@ -33,15 +33,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## TODO:
 
-* improve `create_docs.sh`: **it should succeed only if everything succeeds**, check for environment and input consistency and should be callable from everywhere (requiring or computing repo root path).
-
-* expand branching model: https://nvie.com/posts/a-successful-git-branching-model/
-
-* add infrastructure for GitHub pages with Travis https://kbroman.org/simple_site/pages/independent_site.html
-
-
+core functionality implemented so far
 
 ## MAYBE TODO:
+
+* add infrastructure for GitHub pages with Travis https://kbroman.org/simple_site/pages/independent_site.html
 
 * Automatic changelog creation from issues, PRs, tags: https://github.com/github-changelog-generator/github-changelog-generator
 
@@ -51,5 +47,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * add online codecov https://codecov.io/
 
+* get rid of "environment" in `ci_scripts` and `memorybenchmark`
 
 
