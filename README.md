@@ -572,15 +572,42 @@ xx
 
 # Adapting to other repos:
 
-These steps may be automated in the future, for the moment have to be done by hand:
+These steps have to be done once when starting a repo from this template. They may be automated in the future, for the moment they have to be done by hand:
 
-* rename `dummypackage` to this project's name
-* rename tests directory to the project's name followed by `_utest`. Remove all contents except for the tautology and init file.
+* remove any `egg-info`, `build` or `dist` directories if existing.
+
+* rename `dummypackage` to this project's name, and leave it with an `__init__.py` file that contains the package `name` (and optionally `__author__`).
+
+* rename tests directory to the project's name followed by `_utest`. Remove all contents except for the (unchanged) tautology and init file, and add at least one proper test to avoid code coverage throwing an exception.
+
 * `.bumpversion.cfg`: make sure that version is at start, e.g. `0.1.0`
-* `setup.py`: adapt `setup` variables to new repo. Make sure project names match.
-* Add extra `requirements` and `gitignore` entries, if known
+
+* `setup.py`: adapt `setup` variables to new repo. Make sure project name and version match.
+
+* Add extra `requirements` and `gitignore` entries, if known at this point.
+
 * replace/remove `dummyapp.py`
+
 * clean `CHANGELOG`
 
+* In the `travis` file:
+  * adapt the env.global variables.
+  * Rename the utest directory at the tautological test script
+
+* In `ci_scripts/utest_with_coverage`: replace the utest import and `run_all_tests` call with the utest adapted name.
+  * 
+
+* If no profiling is to be done:
+  * Delete benchmark directories
+  * From `travis` file, remove the `MAX_MB_ALLOWED, MEM_MEASURE_EVERY_SEC, MAX_SEC_PER_LOOP` variables, 
+  * remove the `-script, -name, -script, -name` entries in `jobs.include` corresponding to benchmarks.
+  * remove the benchmark scripts from `ci_scripts`.
+
+* Test the travis commands locally
+
+* To configure the deployment to GitHub, make a backup of the travis file, and run `travis setup releases` as explained before. PyPI deployment won't need a specific configuration.
 
 * Finally edit `README` and add badges for Travis, PyPI and readthedocs.
+
+
+

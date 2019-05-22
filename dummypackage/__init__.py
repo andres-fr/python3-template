@@ -163,3 +163,4 @@ True   True   True
 
 
 name = "dummypackage"
+__author__ = "Dummy Dumson"
