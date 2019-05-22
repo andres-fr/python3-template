@@ -27,7 +27,7 @@ def setup():
         long_description=long_description,
         long_description_content_type="text/markdown",
         url="https://github.com/andres-fr/python3-template",
-        packages=setuptools.find_packages(exclude=["utest*"]),
+        packages=setuptools.find_packages(exclude=["*utest*"]),
         include_package_data=True,
         classifiers=[
             # comprehensive list: https://pypi.org/classifiers/

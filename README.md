@@ -6,7 +6,7 @@ Dummy Python3 project providing structure for development, unit testing, runtime
 
 * The actual code is to be developed in the `dummypackage` library, and used in an application like `dummyapp.py`, which can be run with `python dummyapp.py`. **To ensure proper function of the tools, all subdirectories must include an `__init.py__` file**.
 
-* The unit tests are developed in the `utest` directory. They can also be arbitrarily nested, but also **must include an `__init.py__` file in each test directory**.
+* The unit tests are developed in the `dummypackage_utest` directory. They can also be arbitrarily nested, but also **must include an `__init.py__` file in each test directory**.
 
 * Reports for runtime and memory benchmarks can be generated into `timebenchmark` and `memorybenchmark` respectively.
 
@@ -32,7 +32,7 @@ export PATH=${PATH}:$HOME/.local/bin
 
 All unit test files must fulfill the following requirements (see the examples for more details):
 
-* They have to be in the `utest` directory
+* They have to be in the `dummypackage_utest` directory
 * Their name has to end in `_test.py` (although this is customizable)
 * They import functionality from the package like this: `from dummypackage.foo_module import Foo`
 * They import functionality from each other like this: `from .foo_test import FooTestCaseCpu`
@@ -42,22 +42,22 @@ All unit test files must fulfill the following requirements (see the examples fo
 
 If these conditions are met, all the tests can be run from the CLI or within Python.
 
-**Note**: the `utest` directory includes a special test case, `tautology.py` which should always pass and can be used to ensure that the testing facilities work correctly. Its name doesn't end in `_test.py`, so it doesn't get included in the ordinary tests and has to be called explicitly.
+**Note**: the `dummypackage_utest` directory includes a special test case, `tautology.py` which should always pass and can be used to ensure that the testing facilities work correctly. Its name doesn't end in `_test.py`, so it doesn't get included in the ordinary tests and has to be called explicitly.
 
 ### Run from CLI:
 
 ```bash
 # run all existing tests
-python -m unittest discover -s utest -t . -p "*_test.py" -v
+python -m unittest discover -s dummypackage_utest -t . -p "*_test.py" -v
 # Run individual test modules (from the repo root dir)
-python -m unittest utest/foo_test.py -v
-python -m unittest utest/bar_test.py -v
-python -m unittest utest/nestedtests/nested_test.py -v
+python -m unittest dummypackage_utest/foo_test.py -v
+python -m unittest dummypackage_utest/bar_test.py -v
+python -m unittest dummypackage_utest/nestedtests/nested_test.py -v
 # Run individual classes
-python -m unittest utest.foo_test.FooTestCaseCpu -v
-python -m unittest utest.nestedtests.nested_test.QuackTestCaseCpu -v
+python -m unittest dummypackage_utest.foo_test.FooTestCaseCpu -v
+python -m unittest dummypackage_utest.nestedtests.nested_test.QuackTestCaseCpu -v
 # Run individual methods
-python -m unittest utest.bar_test.BarTestCaseCpu.test_inheritance -v
+python -m unittest dummypackage_utest.bar_test.BarTestCaseCpu.test_inheritance -v
 ```
 
 ### Run within Python:
@@ -65,44 +65,44 @@ python -m unittest utest.bar_test.BarTestCaseCpu.test_inheritance -v
 ```python
 
 # run all existing tests and collect results
-import utest
-results = utest.run_all_tests()
+import dummypackage_utest
+results = dummypackage_utest.run_all_tests()
 print(results)
 
 # run all tests for a given module and collect results
-import utest.foo_test
-results = utest.run_module(utest.foo_test);
+import dummypackage_utest.foo_test
+results = dummypackage_utest.run_module(utest.foo_test);
 print(results)
 
 # run for several modules:
-import utest
-import utest.foo_test as f
-import utest.nestedtests.nested_test as n
-results = utest.run_modules([f, n]);
+import dummypackage_utest
+import dummypackage_utest.foo_test as f
+import dummypackage_utest.nestedtests.nested_test as n
+results = dummypackage_utest.run_modules([f, n]);
 print(results)
 
 # run for a single testcase
-import utest
-from utest.foo_test import FooTestCaseCpu
-results = utest.run_testcase(FooTestCaseCpu);
+import dummypackage_utest
+from dummypackage_utest.foo_test import FooTestCaseCpu
+results = dummypackage_utest.run_testcase(FooTestCaseCpu);
 print(results)
 
 # run for several testcases
-import utest
-from utest.foo_test import FooTestCaseCpu
-from utest.bar_test import BarTestCaseCpu
-results = utest.run_testcases([FooTestCaseCpu, BarTestCaseCpu]);
+import dummypackage_utest
+from dummypackage_utest.foo_test import FooTestCaseCpu
+from dummypackage_utest.bar_test import BarTestCaseCpu
+results = dummypackage_utest.run_testcases([FooTestCaseCpu, BarTestCaseCpu]);
 print(results)
 
 # run for a single method
-import utest
-results = utest.run_testmethod("utest.foo_test.FooTestCaseCpu.test_loop");
+import dummypackage_utest
+results = dummypackage_utest.run_testmethod("dummypackage_utest.foo_test.FooTestCaseCpu.test_loop");
 print(results)
 
 # run for several methods
-import utest
-results = utest.run_testmethods(["utest.foo_test.FooTestCaseCpu.test_loop",
-                                "utest.bar_test.BarTestCaseCpu.test_loop"]);
+import dummypackage_utest
+results = dummypackage_utest.run_testmethods(["dummypackage_utest.foo_test.FooTestCaseCpu.test_loop",
+                                              "dummypackage_utest.bar_test.BarTestCaseCpu.test_loop"]);
 print(results)
 ```
 
@@ -122,7 +122,7 @@ export COVERAGE_FILE=codecoverage/coverage`date "+%Y%m%d_%H%M%S"`
 # Run whatever you want to run but prepending 'coverage run'
 # the --branch flag activates branch coverage (as opposed to statement coverage)
 # the -a flag will accumulate the reports
-coverage run --source dummypackage --branch -m unittest discover -s utest -t . -p "*_test.py" -v
+coverage run --source dummypackage --branch -m unittest discover -s dummypackage_utest -t . -p "*_test.py" -v
 
 # Print report on terminal
 coverage report -m
@@ -142,7 +142,7 @@ This sample script performs unit testing AND test coverage wthout creating any f
 ```python
 
 import coverage
-import utest
+import dummypackage_utest
 
 # same as with the CLI. A suffix will be automatically added
 COVERAGE_FILE = "codecoverage/coverage"
@@ -151,7 +151,7 @@ COVERAGE_FILE = "codecoverage/coverage"
 c = coverage.Coverage(data_file=COVERAGE_FILE, data_suffix=True, branch=True,
                       source=["dummypackage"])
 c.start()
-test_results = utest.run_all_tests()
+test_results = dummypackage_utest.run_all_tests()
 c.stop()
 
 # at this point c.save() and c.html_report(outfile=etc) would generate files.
@@ -568,3 +568,19 @@ git push -u origin dev # the first time, then `git push`
 # once a milestone is reached, merge into master:
 xx
 ```
+
+
+# Adapting to other repos:
+
+These steps may be automated in the future, for the moment have to be done by hand:
+
+* rename `dummypackage` to this project's name
+* rename tests directory to the project's name followed by `_utest`. Remove all contents except for the tautology and init file.
+* `.bumpversion.cfg`: make sure that version is at start, e.g. `0.1.0`
+* `setup.py`: adapt `setup` variables to new repo. Make sure project names match.
+* Add extra `requirements` and `gitignore` entries, if known
+* replace/remove `dummyapp.py`
+* clean `CHANGELOG`
+
+
+* Finally edit `README` and add badges for Travis, PyPI and readthedocs.

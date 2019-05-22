@@ -63,7 +63,7 @@ jobs:
     - stage: test
       name: "Check Code Style"
       script: python -m flake8
-    - script: python -m unittest utest/tautology.py
+    - script: python -m unittest dummypackage_utest/tautology.py
       name: "Tautological Test"
     - script: python ci_scripts/utest_with_coverage.py -n "$DOC_PACKAGE_NAME" -p "$CODECOV_REQUIRED_PERCENT"
       name: "Unit Testing and Code Coverage"
