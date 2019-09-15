@@ -34,9 +34,9 @@ copyright = '2019, Dummy Dumson'
 author = 'Dummy Dumson'
 
 # The short X.Y version
-version = '1.5.1'
+version = '1.5.2'
 # The full version, including alpha/beta/rc tags
-release = '1.5.1'
+release = '1.5.2'
 
 
 # -- General configuration ---------------------------------------------------
