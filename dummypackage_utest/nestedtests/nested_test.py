@@ -15,12 +15,12 @@ from dummypackage.bar_module import Bar
 class QuackTestCaseCpu(unittest.TestCase):
     """
     """
-    def test_dummy(self):
+    def test_dummy(self)-> None:
         """
         """
         f = Foo()
         b = Bar()
         f.loop(100)
         b.loop(3)
-        fb = f.get_result()+b.get_result()
+        fb: int = f.get_result() + b.get_result()
         self.assertEqual(fb, 103)

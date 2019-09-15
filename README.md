@@ -1,7 +1,7 @@
 # python3-template   [![Build Status](https://travis-ci.org/andres-fr/python3-template.svg?branch=master)](https://travis-ci.org/andres-fr/python3-template) [![PyPI version](https://badge.fury.io/py/dummypackage-dummyname.svg)](https://badge.fury.io/py/dummypackage-dummyname) [![Documentation Status](https://readthedocs.org/projects/python3-template/badge/?version=latest)](https://python3-template.readthedocs.io/en/latest/?badge=latest)
 
 
-Dummy Python3 project providing structure for development, unit testing, runtime/memory benchmarking, PEP8 check, [autodocumentation](https://python3-template.readthedocs.io), and deployment to [PyPI](https://pypi.org/project/dummypackage-dummyname) and [GitHub Releases](https://github.com/andres-fr/python3-template/releases), automated via [Travis CI](https://travis-ci.org/andres-fr/python3-template) (online and locally).
+Dummy Python3 project providing structure for development, static typecheck, unit testing, runtime/memory benchmarking, PEP8 check, [autodocumentation](https://python3-template.readthedocs.io), and deployment to [PyPI](https://pypi.org/project/dummypackage-dummyname) and [GitHub Releases](https://github.com/andres-fr/python3-template/releases), automated via [Travis CI](https://travis-ci.org/andres-fr/python3-template) (online and locally).
 
 
 * The actual code is to be developed in the `dummypackage` library, and used in an application like `dummyapp.py`, which can be run with `python dummyapp.py`. **To ensure proper function of the tools, all subdirectories must include an `__init.py__` file**.
@@ -105,6 +105,29 @@ results = dummypackage_utest.run_testmethods(["dummypackage_utest.foo_test.FooTe
                                               "dummypackage_utest.bar_test.BarTestCaseCpu.test_loop"]);
 print(results)
 ```
+
+
+# Static Typing:
+
+Python 3 allows to statically annotate the type of a variable, with the so-called [type hints](https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html), e.g.:
+
+```
+from typing import Dict
+test: str = "hello"
+d: Dict[int, int] = {1: 2, 3: 4}
+def test_fn(a: str, b: int)-> str:
+  return a + str(b)
+```
+
+But the interpreter itself won't check for static errors. For that, the `mypy` package can be used as follows:
+
+```
+python -m mypy dummyapp.py
+python -m mypy dummypackage
+python -m mypy dummypackage_utest
+```
+
+Will return all errors found **on annotated code** within `dummypackage` (type errors in non-annotated functions will be ignored!). Programatical run within Python is probably not supported or encouraged, in words of the ex-BDFL himself: https://github.com/python/mypy/issues/2369#issuecomment-256984061 but if you are reading this and know an easy way please do let know.
 
 
 # Code Coverage:

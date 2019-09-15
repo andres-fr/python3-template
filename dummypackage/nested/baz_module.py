@@ -11,20 +11,20 @@ class Baz(object):
     """
     A class with many lines that don't get tested
     """
-    a = 123
-    b = 123
-    c = 123
-    d = 123
-    e = 123
-    f = 123
-    g = 123
-    h = 123
-    i = 123
-    j = 123
-    k = 123
-    m = 123
-    n = 123
-    o = 123
-    p = 123
-    q = 123
-    r = 123
+    a: int = 123
+    b: int = 123
+    c: int = 123
+    d: int = 123
+    e: int = 123
+    f: int = 123
+    g: int = 123
+    h: int = 123
+    i: int = 123
+    j: int = 123
+    k: int = 123
+    m: int = 123
+    n: int = 123
+    o: int = 123
+    p: int = 123
+    q: int = 123
+    r: int = 123

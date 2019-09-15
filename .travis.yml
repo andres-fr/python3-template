@@ -66,6 +66,10 @@ jobs:
       script: python -m flake8
     - script: python -m unittest dummypackage_utest/tautology.py
       name: "Tautological Test"
+    - script: python -m mypy -p dummypackage -p dummypackage_utest
+      name: "Check Static Typing"
+    - script: python -m mypy dummyapp.py
+      name: "Check Static Typing (app)"
     - script: python ci_scripts/utest_with_coverage.py -n "$DOC_PACKAGE_NAME" -p "$CODECOV_REQUIRED_PERCENT"
       name: "Unit Testing and Code Coverage"
     - script: python ci_scripts/memory_benchmark.py -m "$MAX_MB_ALLOWED" -i "$MEM_MEASURE_EVERY_SEC"

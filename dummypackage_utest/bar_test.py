@@ -19,7 +19,7 @@ class BarTestCaseCpu(FooTestCaseCpu):
     """
     CLASS = Bar
 
-    def test_inheritance(self):
+    def test_inheritance(self)-> None:
         """
         Dummy check that Bar inherits from Foo
         """
