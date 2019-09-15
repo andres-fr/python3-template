@@ -106,7 +106,7 @@ jobs:
           skip_cleanup: true
           user: "$PYPI_USERNAME"
           password:
-            secure: "Dk8uulP1kEz1kN/ClOTUeLS467gMGIe897tlxAVjQv0NDIjLUxG4plj09XKN22QXxcJpDlyz8qEmXm7fNLkRzsaLbxRmOZaU8FBRQfViqNlyrGbb0Y5gLDzBKikSfz7AFfQ/xtRq8/4M0vpmbTd98g5cbGDTV/EZbOnDsW+uCbTIAPtWo/s/WGikzPEhk/vLrmg58r1O1rkMRM3p/N03FiAgnzgF5DIgCl7yahKLGSzy7s2tWXH9wZfNxrgHl+jYvN8ZFqPIUN/SW0GmjBl7peduN7o699h5PRlXHoWes385Xm4jWKeLCPamdzNWb1XnZ2MO9K71L7uaSSGJlLzRPgiJzGXK1IwGi1wIak0ncmnjnlRF4PAkospOE5BvUYa9TkCvO+aOp1C8+WPdjLRUb8RuZZT9wrOx9n4IKEJyjHqCdIve74/iO8mvtrH8RLtfL+BifyvgYPYC95t2TiGzB+noX6bfvekgNqlyZlwPp75rIXp3Q2KIyPBwdqpV+YtdTb0ONdA/GXS8jup72IjsFqeH88Uxz09n22w4dfUFRp0Ia0HQDKJinVhBqMAPtUKgQF5Ut6L5YJy0TQxb5k/pH8NubjWxmsO69jt0WieylCldU/S199QlZd97m1nGpB888QOzybK9nK2YFWr6QO7R9t91/QSjd0tA7d9cQ3mdghg="
+            secure: "eyMqiepCO+bHxs1IhmjEbXW1pKfGWXKpkcBgvjtevybTTg3T4XS3vwFFAO/PRe+CRSgTKieUQZaeXtQFraJJRhEzAa+5DlrQA256QRXqhbxs/684eQxcRWxxZGzLm0jbE8qH0EvPFE8mwPIWPNv4JtPpSlCo4vFMMxEaKmgK2Nt1SpXGaQ7s3F3DcctSx4rH2TvAh7pN4Ktx+mjM/1SFJ/DvLFKYBIhr2EswDCmxsZqc9NatbZpVN7Ip/oVsyrTd0i96C+GBufRmztJXDpdnxGAaSC517t6HPP7DiYfm2Izsf3YkQh9u0H/ZbCjx6BavvPQHcINdVBIzpwyYTNp3aIycSSMzylX/37LVbIaAP6fPSwxbM39fs+/ZiUx+H95q8ytTD2iOgjkEzij8AuaOZY12RRDkOZRd+J6uB4S4LkCtxf9RfNx9ZjY7GNlojFv6cAYsBBitnNCM0EwgBjUpnrfMwXduKnyoZE+lj3TvdRof/J/klVFEqz81FZpdttknjUE8+HOwvSGiS/RFzj1W1of+ofk+qNOEW1VsnzL1iEmk+rVHM+6Juf1INO5GhrUXgzrN51lXsMOkcDngNj2nDx/EJgMLkwRAk9rsd9zyGQYRPpvZ15qffYNi2YQLgR6jkhzzlDxFAWwVvY9x1C1bPHBZWBCzK5L3aMYmtBSSyuU="
           on:
             tags: true
             # branch: master # already filtered out in the "branches" section
