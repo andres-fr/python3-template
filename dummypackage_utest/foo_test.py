@@ -17,7 +17,7 @@ class FooTestCaseCpu(unittest.TestCase):
     """
     CLASS = Foo
 
-    def test_init_parameter(self)-> None:
+    def test_init_parameter(self) -> None:
         """
         Constructor expects an error if given anything but a positive int:
         """
@@ -26,7 +26,7 @@ class FooTestCaseCpu(unittest.TestCase):
         self.assertRaises(AssertionError, self.CLASS, 0)
         self.assertRaises(AssertionError, self.CLASS, -1)
 
-    def test_loop(self)-> None:
+    def test_loop(self) -> None:
         """
         Some testing of loop
         """

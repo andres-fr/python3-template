@@ -22,7 +22,7 @@ class Bar(Foo):
         super(Bar, self).__init__(size)
         self._x: List[int] = list(self._x)  # memory overhead
 
-    def _computation(self)-> None:
+    def _computation(self) -> None:
         """
         The computation will be 2*O(n) instead of O(1)
         """

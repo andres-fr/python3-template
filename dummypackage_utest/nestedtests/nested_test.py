@@ -15,7 +15,7 @@ from dummypackage.bar_module import Bar
 class QuackTestCaseCpu(unittest.TestCase):
     """
     """
-    def test_dummy(self)-> None:
+    def test_dummy(self) -> None:
         """
         """
         f = Foo()

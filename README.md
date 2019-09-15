@@ -115,7 +115,7 @@ Python 3 allows to statically annotate the type of a variable, with the so-calle
 from typing import Dict
 test: str = "hello"
 d: Dict[int, int] = {1: 2, 3: 4}
-def test_fn(a: str, b: int)-> str:
+def test_fn(a: str, b: int) -> str:
   return a + str(b)
 ```
 

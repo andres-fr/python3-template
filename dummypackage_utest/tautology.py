@@ -16,7 +16,7 @@ class Tautology(unittest.TestCase):
     Contains a simple test that always passes
     """
 
-    def test_tautology(self)-> None:
+    def test_tautology(self) -> None:
         """
         A  simple test that always passes
         """

@@ -12,7 +12,7 @@ from dummypackage.bar_module import Bar
 from dummypackage.nested.baz_module import Baz
 
 
-def do_loop(clss, memsize, loopsize)-> None:
+def do_loop(clss, memsize, loopsize) -> None:
     """
     Create a Foo instance and loop it.
     """
